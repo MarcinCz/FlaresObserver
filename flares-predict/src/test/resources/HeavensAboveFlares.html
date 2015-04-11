@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en"><head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>
+    Iridium Flares
+</title><meta name="description" content="Satellite predictions and other astronomical data customised for your location."><link href="Iridium%20Flares_pliki/ha.css" rel="stylesheet" type="text/css"><link rel="shortcut icon" href="http://heavens-above.com/favicon.ico" type="image/vnd.microsoft.icon"><link rel="icon" href="http://heavens-above.com/favicon.ico" type="image/vnd.microsoft.icon">
+    <script type="text/javascript" src="Iridium%20Flares_pliki/jquery-1.js"></script><style>.adsbygoogle
+    {display:none !important;}</style>
+    <script type="text/javascript" src="Iridium%20Flares_pliki/standard.js"></script>
+    <script type="text/javascript">
+        function updateLocalTime(utc) {
+            var localdiff = parseInt($('#utcOffset').val());
+            var local_now = new Date(utc.getTime() + localdiff);
+            $('#spanTime').text(formatTime(local_now));
+        }
+
+        $(function () {
+            onClockTick = updateLocalTime;
+            startClock();
+        });
+    </script>
+
+</head>
+<body>
+<form method="post" action="/IridiumFlares.aspx?lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET" id="aspnetForm">
+<div class="aspNetHidden">
+    <input name="__EVENTTARGET" id="__EVENTTARGET" value="" type="hidden">
+    <input name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" type="hidden">
+    <input name="__LASTFOCUS" id="__LASTFOCUS" value="" type="hidden">
+    <input name="__VIEWSTATE" id="__VIEWSTATE" value="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ZWF2ZW5zLWFib3ZlLmNvbSI+Q2hyaXMgUGVhdDwvYT4sIEhlYXZlbnMtQWJvdmUgR21iSC4gUGxlYXNlIHJlYWQgdGhlIDxhIGhyZWY9ImZhcS5hc3B4Ij5GQVE8L2E+IGJlZm9yZSBzZW5kaW5nIGUtbWFpbC4gPGEgaHJlZj0iSW1wcmludC5hc3B4Ij5JbXByaW50PC9hPi5kAhMPFgIfAQWcAjxzY3JpcHQgdHlwZT0idGV4dC9qYXZhc2NyaXB0Ij4NCjwhLS0NCiBnb29nbGVfYWRfY2xpZW50ID0gImNhLXB1Yi01NjY4Mjk3MDc2MjE3MTU1IjsgZ29vZ2xlX2FkX3Nsb3QgPSAiNTc0NzQ3NzIxNSI7IGdvb2dsZV9hZF93aWR0aCA9IDE2MDsgZ29vZ2xlX2FkX2hlaWdodCA9IDYwMDsNCi8vLS0+DQo8L3NjcmlwdD4NCjxzY3JpcHQgdHlwZT0idGV4dC9qYXZhc2NyaXB0IiBzcmM9Ii8vcGFnZWFkMi5nb29nbGVzeW5kaWNhdGlvbi5jb20vcGFnZWFkL3Nob3dfYWRzLmpzIj4NCjwvc2NyaXB0Pg0KZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WAQUVY3RsMDAkY3BoMSRjaGtEYXl0aW1lIynPTDrO3EhWzQWaoDr4wI8coo0E03BZ6VC+5nxYEDs=" type="hidden">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<div class="aspNetHidden">
+
+    <input name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="36BEB127" type="hidden">
+</div>
+<input name="utcOffset" id="utcOffset" value="7200000" type="hidden">
+<table style="margin-left: auto; margin-right: auto; border-style: none" border="0">
+<tbody><tr>
+    <td>
+        <a id="ctl00_hyperlinkLogo" href="http://heavens-above.com/?lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en" style="display:inline-block;border-style:None;"><img src="Iridium%20Flares_pliki/tinylogo.jpg" alt=""></a>
+    </td>
+    <td>
+
+        <script type="text/javascript"><!--
+                        google_ad_client = "ca-pub-5668297076217155";
+                        google_ad_slot = "5479771053";
+                        google_ad_width = 728;
+                        google_ad_height = 90;
+//-->
+                    </script>
+
+
+    </td>
+    <td>
+        <table class="userTable">
+            <tbody><tr>
+                <td>
+                    User:
+                </td>
+                <td>
+                    anonymous&nbsp;&nbsp;&nbsp;<a href="http://heavens-above.com/login.aspx">Login</a>
+                </td>
+            </tr>
+            <tr class="lightrow">
+                <td>
+                    Location:
+                </td>
+                <td>
+                    <a id="ctl00_linkObservationSite" href="http://heavens-above.com/SelectLocation.aspx?lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Unspecified</a>
+
+                </td>
+            </tr>
+            <tr class="lightrow">
+                <td colspan="2" align="center">
+                    (<a id="ctl00_linkLatLong" href="http://heavens-above.com/SelectLocation.aspx?lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">51.1793°N, 18.6328°E</a>)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Time:
+                </td>
+                <td>
+                    <span id="spanTime">16:37:35</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    (UTC<span id="ctl00_lblTZ">+02:00</span>)
+                </td>
+            </tr>
+            <tr class="lightrow">
+                <td>
+                    Language:
+                </td>
+                <td>
+                    <select name="ctl00$ddlCulture" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ddlCulture\',\'\')', 0)" id="ctl00_ddlCulture">
+                        <option value="ar">العربية</option>
+                        <option value="ca">Català</option>
+                        <option value="cs">Čeština</option>
+                        <option value="da">Dansk</option>
+                        <option value="de">Deutsch</option>
+                        <option value="el">Ελληνικά</option>
+                        <option selected="selected" value="en">English</option>
+                        <option value="eo">Esperanto</option>
+                        <option value="es">Español</option>
+                        <option value="eu">Euskara</option>
+                        <option value="fi">Suomi</option>
+                        <option value="fr">Français</option>
+                        <option value="gl">Galego</option>
+                        <option value="he">עברית</option>
+                        <option value="hr">Hrvatski</option>
+                        <option value="it">Italiano</option>
+                        <option value="ja">日本語</option>
+                        <option value="lt">Lietuvių</option>
+                        <option value="nl">Nederlands</option>
+                        <option value="pl">Polski</option>
+                        <option value="pt">Português brasileiro</option>
+                        <option value="pt-PT">Português de Portugal</option>
+                        <option value="ro">Română</option>
+                        <option value="ru">Русский</option>
+                        <option value="sk">Slovenčina</option>
+                        <option value="sl">Slovenščina</option>
+                        <option value="sv">Svenska</option>
+                        <option value="ta">தமிழ்</option>
+                        <option value="th">ไทย</option>
+                        <option value="tr">Türkçe</option>
+                        <option value="uk">Українська</option>
+                        <option value="zh">简体中文</option>
+                        <option value="zh-CHT">繁體中文</option>
+
+                    </select>
+                </td>
+            </tr>
+
+            </tbody></table>
+    </td>
+</tr>
+<tr>
+    <td colspan="3">
+        <hr>
+    </td>
+</tr>
+<tr>
+    <td colspan="2" valign="top">
+        <table width="100%">
+            <tbody><tr>
+                <td align="left">
+                    <span id="ctl00_lblTitle" class="pagehead">Iridium Flares</span>
+                </td>
+                <td class="navbar" align="right">
+
+                    <span id="ctl00_lblNavBar"><a href="http://heavens-above.com/?lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en" title="Go to home page">Home</a> | <a href="http://heavens-above.com/IridiumHelp.aspx?lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en" title="Help">Help</a></span>
+                </td>
+            </tr>
+            </tbody></table>
+        <p>
+
+            <input name="ctl00$cph1$hidStartUtc" id="ctl00_cph1_hidStartUtc" value="635643580357224034" type="hidden">
+        </p><table>
+        <tbody><tr>
+            <td class="userinfo">
+                Search period start:
+            </td>
+            <td class="userinfo">
+                <span id="ctl00_cph1_lblSearchStart">16:07 Saturday, 11 April, 2015</span>
+            </td>
+            <td class="userinfo" rowspan="2">
+                &nbsp;
+            </td>
+            <td class="userinfo" rowspan="2">
+                <input name="ctl00$cph1$btnPrev" value="&lt;" id="ctl00_cph1_btnPrev" type="submit">
+                <input name="ctl00$cph1$btnNext" value="&gt;" id="ctl00_cph1_btnNext" type="submit">
+            </td>
+            <td class="userinfo" rowspan="2">
+                &nbsp;&nbsp;&nbsp;
+            </td>
+            <td class="userinfo" rowspan="2">
+                <input id="ctl00_cph1_chkDaytime" name="ctl00$cph1$chkDaytime" onclick="javascript:setTimeout('__doPostBack(\'ctl00$cph1$chkDaytime\',\'\')', 0)" type="checkbox"><label for="ctl00_cph1_chkDaytime">include daytime flares</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="userinfo">
+                Search period end:
+            </td>
+            <td class="userinfo">
+                <span id="ctl00_cph1_lblSearchEnd">16:07 Saturday, 18 April, 2015</span>
+            </td>
+        </tr>
+        </tbody></table>
+        <p>
+
+            Clicking on the time of the flare will give more details about the flare, including a sky chart.</p>
+        <table class="standardTable" rules="cols" cellpadding="4" cellspacing="0">
+            <tbody><tr class="tablehead">
+                <td align="center">
+                    Time
+                </td>
+                <td align="center">
+                    Brightness
+                </td>
+                <td align="center">
+                    Altitude
+                </td>
+                <td align="center">
+                    Azimuth
+                </td>
+                <td>
+                    Satellite
+                </td>
+                <td>
+                    Distance to flare centre
+                </td>
+                <td>
+                    Brightness at flare centre
+                </td>
+                <td>
+                    Sun altitude
+                </td>
+            </tr>
+            <tr class="clickableRow lightrow" onclick="window.location='flaredetails.aspx?fid=0&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=0&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 11, 21:58:54</a></td><td align="center">-3.6</td><td align="center">35°</td><td align="center">58° (ENE)</td><td>Iridium 18</td><td align="center">18 km (E)</td><td align="center">-7.6</td><td align="right">-20° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow darkrow" onclick="window.location='flaredetails.aspx?fid=1&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=1&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 12, 02:50:40</a></td><td align="center">-5.8</td><td align="center">10°</td><td align="center">97° (E)</td><td>Iridium 45</td><td align="center">2 km (W)</td><td align="center">-5.8</td><td align="right">-25° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow lightrow" onclick="window.location='flaredetails.aspx?fid=2&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=2&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 12, 21:52:52</a></td><td align="center">0.7</td><td align="center">34°</td><td align="center">59° (ENE)</td><td>Iridium 39</td><td align="center">72 km (E)</td><td align="center">-7.6</td><td align="right">-19° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow darkrow" onclick="window.location='flaredetails.aspx?fid=3&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=3&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 13, 03:03:17</a></td><td align="center">-2.0</td><td align="center">9°</td><td align="center">92° (E)</td><td>Iridium 57</td><td align="center">125 km (W)</td><td align="center">-5.7</td><td align="right">-23° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow lightrow" onclick="window.location='flaredetails.aspx?fid=4&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=4&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 13, 03:04:20</a></td><td align="center">-2.1</td><td align="center">10°</td><td align="center">93° (E)</td><td>Iridium 29</td><td align="center">123 km (W)</td><td align="center">-5.8</td><td align="right">-23° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow darkrow" onclick="window.location='flaredetails.aspx?fid=5&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=5&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 13, 03:12:27</a></td><td align="center">0.6</td><td align="center">11°</td><td align="center">94° (E)</td><td>Iridium 58</td><td align="center">268 km (W)</td><td align="center">-5.9</td><td align="right">-22° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow lightrow" onclick="window.location='flaredetails.aspx?fid=6&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=6&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 13, 21:56:09</a></td><td align="center">0.3</td><td align="center">42°</td><td align="center">61° (ENE)</td><td>Iridium 81</td><td align="center">61 km (W)</td><td align="center">-7.9</td><td align="right">-19° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow darkrow" onclick="window.location='flaredetails.aspx?fid=7&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=7&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 14, 02:57:08</a></td><td align="center">0.1</td><td align="center">9°</td><td align="center">93° (E)</td><td>Iridium 60</td><td align="center">108 km (E)</td><td align="center">-5.7</td><td align="right">-23° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow lightrow" onclick="window.location='flaredetails.aspx?fid=8&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=8&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 14, 03:06:11</a></td><td align="center">-5.8</td><td align="center">11°</td><td align="center">96° (E)</td><td>Iridium 55</td><td align="center">34 km (W)</td><td align="center">-5.9</td><td align="right">-22° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow darkrow" onclick="window.location='flaredetails.aspx?fid=9&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=9&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 14, 03:15:26</a></td><td align="center">0.0</td><td align="center">13°</td><td align="center">97° (E)</td><td>Iridium 95</td><td align="center">195 km (W)</td><td align="center">-6.0</td><td align="right">-22° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow lightrow" onclick="window.location='flaredetails.aspx?fid=10&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=10&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 14, 20:14:50</a></td><td align="center">-0.9</td><td align="center">71°</td><td align="center">110° (ESE)</td><td>Iridium 50</td><td align="center">28 km (W)</td><td align="center">-8.5</td><td align="right">-6° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow darkrow" onclick="window.location='flaredetails.aspx?fid=11&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=11&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 14, 21:50:04</a></td><td align="center">-7.6</td><td align="center">41°</td><td align="center">61° (ENE)</td><td>Iridium 43</td><td align="center">7 km (W)</td><td align="center">-7.9</td><td align="right">-18° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow lightrow" onclick="window.location='flaredetails.aspx?fid=12&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=12&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 14, 21:51:09</a></td><td align="center">-2.8</td><td align="center">41°</td><td align="center">61° (ENE)</td><td>Iridium 42</td><td align="center">24 km (W)</td><td align="center">-7.9</td><td align="right">-19° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow darkrow" onclick="window.location='flaredetails.aspx?fid=13&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=13&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 15, 02:50:31</a></td><td align="center">0.7</td><td align="center">13°</td><td align="center">104° (ESE)</td><td>Iridium 45</td><td align="center">192 km (E)</td><td align="center">-6.1</td><td align="right">-24° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow lightrow" onclick="window.location='flaredetails.aspx?fid=14&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=14&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 15, 03:00:01</a></td><td align="center">-0.8</td><td align="center">11°</td><td align="center">97° (E)</td><td>Iridium 31</td><td align="center">142 km (E)</td><td align="center">-5.9</td><td align="right">-23° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow darkrow" onclick="window.location='flaredetails.aspx?fid=15&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=15&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 15, 03:09:13</a></td><td align="center">-6.1</td><td align="center">13°</td><td align="center">98° (E)</td><td>Iridium 30</td><td align="center">9 km (W)</td><td align="center">-6.1</td><td align="right">-22° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow lightrow" onclick="window.location='flaredetails.aspx?fid=16&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=16&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 15, 03:18:27</a></td><td align="center">0.0</td><td align="center">16°</td><td align="center">100° (E)</td><td>Iridium 32</td><td align="center">160 km (W)</td><td align="center">-6.3</td><td align="right">-21° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow darkrow" onclick="window.location='flaredetails.aspx?fid=17&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=17&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 15, 20:08:47</a></td><td align="center">-8.4</td><td align="center">70°</td><td align="center">110° (ESE)</td><td>Iridium 53</td><td align="center">1 km (E)</td><td align="center">-8.5</td><td align="right">-5° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow lightrow" onclick="window.location='flaredetails.aspx?fid=18&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=18&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 15, 21:44:03</a></td><td align="center">-0.4</td><td align="center">40°</td><td align="center">62° (ENE)</td><td>Iridium 40</td><td align="center">46 km (E)</td><td align="center">-7.8</td><td align="right">-17° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow darkrow" onclick="window.location='flaredetails.aspx?fid=19&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=19&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 16, 03:03:02</a></td><td align="center">-0.3</td><td align="center">13°</td><td align="center">100° (E)</td><td>Iridium 57</td><td align="center">141 km (E)</td><td align="center">-6.0</td><td align="right">-22° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow lightrow" onclick="window.location='flaredetails.aspx?fid=20&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=20&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 16, 03:03:24</a></td><td align="center">-0.3</td><td align="center">13°</td><td align="center">100° (E)</td><td>Iridium 29</td><td align="center">137 km (E)</td><td align="center">-6.1</td><td align="right">-22° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow darkrow" onclick="window.location='flaredetails.aspx?fid=21&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=21&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 16, 03:12:17</a></td><td align="center">-6.1</td><td align="center">15°</td><td align="center">101° (E)</td><td>Iridium 58</td><td align="center">14 km (W)</td><td align="center">-6.2</td><td align="right">-21° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow lightrow" onclick="window.location='flaredetails.aspx?fid=22&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=22&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 16, 03:21:28</a></td><td align="center">0.6</td><td align="center">19°</td><td align="center">103° (ESE)</td><td>Iridium 59</td><td align="center">169 km (W)</td><td align="center">-6.4</td><td align="right">-20° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow darkrow" onclick="window.location='flaredetails.aspx?fid=23&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=23&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 16, 21:38:00</a></td><td align="center">0.8</td><td align="center">41°</td><td align="center">64° (ENE)</td><td>Iridium 77</td><td align="center">63 km (E)</td><td align="center">-7.9</td><td align="right">-16° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow lightrow" onclick="window.location='flaredetails.aspx?fid=24&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=24&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 17, 03:06:03</a></td><td align="center">-0.5</td><td align="center">15°</td><td align="center">103° (ESE)</td><td>Iridium 55</td><td align="center">111 km (E)</td><td align="center">-6.3</td><td align="right">-21° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow darkrow" onclick="window.location='flaredetails.aspx?fid=25&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=25&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 17, 03:15:21</a></td><td align="center">-4.0</td><td align="center">18°</td><td align="center">103° (ESE)</td><td>Iridium 95</td><td align="center">41 km (W)</td><td align="center">-6.4</td><td align="right">-20° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow lightrow" onclick="window.location='flaredetails.aspx?fid=26&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=26&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 17, 21:41:09</a></td><td align="center">-0.4</td><td align="center">47°</td><td align="center">64° (ENE)</td><td>Iridium 41</td><td align="center">44 km (W)</td><td align="center">-8.1</td><td align="right">-17° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow darkrow" onclick="window.location='flaredetails.aspx?fid=27&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=27&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 18, 03:09:09</a></td><td align="center">-1.8</td><td align="center">18°</td><td align="center">105° (ESE)</td><td>Iridium 30</td><td align="center">66 km (E)</td><td align="center">-6.4</td><td align="right">-21° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr><tr class="clickableRow lightrow" onclick="window.location='flaredetails.aspx?fid=28&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en'"><td><a href="http://heavens-above.com/flaredetails.aspx?fid=28&amp;lat=51.1793&amp;lng=18.6328&amp;loc=Unspecified&amp;alt=221&amp;tz=CET&amp;cul=en">Apr 18, 03:18:26</a></td><td align="center">-0.6</td><td align="center">21°</td><td align="center">107° (ESE)</td><td>Iridium 32</td><td align="center">95 km (W)</td><td align="center">-6.7</td><td align="right">-20° <img src="Iridium%20Flares_pliki/moon-icon.png" height="16" width="16"></td></tr>
+            </tbody></table>
+
+        &nbsp;
+        <p>
+        </p><table style="border-top: 1px solid black;">
+        <tbody><tr>
+            <td style="width: 100px" valign="top">
+
+            </td>
+            <td valign="top">
+                <div class="footer">
+                    Developed and maintained by <a href="mailto:Chris.Peat@heavens-above.com">Chris Peat</a>, Heavens-Above GmbH. Please read the <a href="http://heavens-above.com/faq.aspx">FAQ</a> before sending e-mail. <a href="http://heavens-above.com/Imprint.aspx">Imprint</a>.
+                </div>
+            </td>
+            <td>
+                <a href="http://www.dlr.de/rb/en/" target="_blank">
+                    <img src="Iridium%20Flares_pliki/dlrhost.gif" alt="DLR" align="left" border="0"></a>
+            </td>
+        </tr>
+        </tbody></table>
+    </td>
+    <td rowspan="1" valign="top">
+        <p>
+
+
+            <!-- Large rectangle -->
+            <ins class="adsbygoogle" style="display: none ! important; width: 336px; height: 280px;" data-ad-client="ca-pub-5668297076217155" data-ad-slot="7480853211"></ins>
+            <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        </p><p>
+        <script async="" src="Iridium%20Flares_pliki/adsbygoogle.js"></script>
+        <!-- Large rectangle -->
+        <ins class="adsbygoogle" style="display: none ! important; width: 336px; height: 280px;" data-ad-client="ca-pub-5668297076217155" data-ad-slot="7480853211"></ins>
+        <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    </p></td>
+</tr>
+</tbody></table>
+</form>
+
+
+</body></html>
