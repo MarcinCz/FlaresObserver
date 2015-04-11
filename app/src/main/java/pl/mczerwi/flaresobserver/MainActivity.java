@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import pl.mczerwi.flarespredict.IridiumFlare;
@@ -20,13 +21,19 @@ import pl.mczerwi.flarespredict.IridiumFlaresPredictorFactory;
 
 public class MainActivity extends ActionBarActivity {
 
+    private TextView view;
+    private TextView viewFlares;
+    private ListView flareListView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TextView view = (TextView) findViewById(R.id.testTextView);
-        final TextView viewFlares = (TextView) findViewById(R.id.textViewFlares);
+        view = (TextView) findViewById(R.id.testTextView);
+        viewFlares = (TextView) findViewById(R.id.textViewFlares);
+        flareListView = (ListView) findViewById(R.id.flares_list_view);
 
         // Acquire a reference to the system Location Manager
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -34,24 +41,9 @@ public class MainActivity extends ActionBarActivity {
         // Define a listener that responds to location updates
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(final Location location) {
-                viewFlares.setText(String.valueOf(location.hasAltitude()));
-                AsyncTask<Location, Void, IridiumFlares> task = new AsyncTask<Location, Void, IridiumFlares>() {
-                    @Override
-                    protected IridiumFlares doInBackground(Location... params) {
-                        IridiumFlaresPredictor predictor = IridiumFlaresPredictorFactory.getInstance();
-                        return predictor.predict(location.getLatitude(), location.getLongitude());
-                    }
-
-                    @Override
-                    protected void onPostExecute(IridiumFlares iridiumFlares) {
-                        IridiumFlare flare = iridiumFlares.getFlares().get(0);
-                        view.setText("alt: " + iridiumFlares.getAltitude() + " lat: " + iridiumFlares.getLatitude() + " lnt: " + iridiumFlares.getLongitude());
-                        viewFlares.setText("Flare: " + flare.getDate() + " " + flare.getAltitude() + " " + flare.getAzimuth() + " " + flare.getBrightness());
-                    }
-                };
+                ShowFlaresPredictionsTask task = new ShowFlaresPredictionsTask();
                 task.execute(location);
             }
-
             public void onStatusChanged(String provider, int status, Bundle extras) {}
 
             public void onProviderEnabled(String provider) {}
@@ -93,5 +85,21 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private class ShowFlaresPredictionsTask extends AsyncTask<Location, Void, IridiumFlares> {
 
+        @Override
+        protected IridiumFlares doInBackground(Location... params) {
+            Location location = params[0];
+            IridiumFlaresPredictor predictor = IridiumFlaresPredictorFactory.getInstance();
+            return predictor.predict(location.getLatitude(), location.getLongitude());
+        }
+
+        @Override
+        protected void onPostExecute(IridiumFlares iridiumFlares) {
+            IridiumFlare flare = iridiumFlares.getFlares().get(0);
+            view.setText("alt: " + iridiumFlares.getAltitude() + " lat: " + iridiumFlares.getLatitude() + " lnt: " + iridiumFlares.getLongitude());
+            viewFlares.setText("Flare: " + flare.getDate() + " " + flare.getAltitude() + " " + flare.getAzimuth() + " " + flare.getBrightness());
+            flareListView.setAdapter(new FlareAdapter(getBaseContext(), iridiumFlares.getFlares()));
+        }
+    };
 }
