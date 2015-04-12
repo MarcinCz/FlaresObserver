@@ -1,15 +1,13 @@
 package pl.mczerwi.flarespredict.heavensabove;
 
+import org.joda.time.DateTime;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import pl.mczerwi.flarespredict.IridiumFlare;
@@ -19,7 +17,7 @@ import pl.mczerwi.flarespredict.altitude.AltitudeProvider;
 
 public class HeavensAbovePredictor implements IridiumFlaresPredictor {
 
-    private final static SimpleDateFormat sdf = new SimpleDateFormat(HeavensAboveConstants.DATE_FORMAT, Locale.ENGLISH);
+    private final static String QUERY_TIMEZONE_VALUE = "UCT";
 
     private final HeavensAboveScraper scraper;
 
@@ -38,7 +36,7 @@ public class HeavensAbovePredictor implements IridiumFlaresPredictor {
     @Override
     public IridiumFlares predict(final double latitude, final double longitude, final double altitude) {
 
-        Document doc = scraper.getPage(getQueryParams(latitude, longitude));
+        Document doc = scraper.getPage(getQueryParams(latitude, longitude, altitude));
         final List<IridiumFlare> iridiumFlares = parseRows(doc);
 
         return new IridiumFlares() {
@@ -64,12 +62,12 @@ public class HeavensAbovePredictor implements IridiumFlaresPredictor {
         };
     }
 
-    private Map<String, String> getQueryParams(double latitude, double longitude) {
+    private Map<String, String> getQueryParams(double latitude, double longitude, double altitude) {
         Map<String, String> params = new HashMap<String, String>();
         params.put(HeavensAboveConstants.LATITUDE_PARAM, String.valueOf(latitude));
         params.put(HeavensAboveConstants.LONGITUDE_PARAM, String.valueOf(longitude));
-        params.put(HeavensAboveConstants.ALTITUDE_PARAM, "0");
-        params.put(HeavensAboveConstants.TIMEZONE_PARAM, "UCT");
+        params.put(HeavensAboveConstants.ALTITUDE_PARAM, String.valueOf(altitude));
+        params.put(HeavensAboveConstants.TIMEZONE_PARAM, QUERY_TIMEZONE_VALUE);
         return params;
     }
 
@@ -85,7 +83,7 @@ public class HeavensAbovePredictor implements IridiumFlaresPredictor {
 
     private IridiumFlare parseRow(Element row) {
         try {
-            final Date date = sdf.parse(row.child(0).text());
+            final DateTime date = HeavensAboveUtil.parseDateFromString(row.child(0).text());
             final double brightness = Double.parseDouble(row.child(1).text());
             final int altitude = Integer.parseInt(row.child(2).text().replaceAll("[^0-9]", ""));
             final int azimuth = Integer.parseInt(row.child(3).text().replaceAll("[^0-9]", ""));
@@ -106,7 +104,7 @@ public class HeavensAbovePredictor implements IridiumFlaresPredictor {
                 }
 
                 @Override
-                public Date getDate() {
+                public DateTime getDate() {
                     return date;
                 }
             };

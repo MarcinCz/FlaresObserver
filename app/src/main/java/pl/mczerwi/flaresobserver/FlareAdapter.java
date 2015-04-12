@@ -1,13 +1,15 @@
 package pl.mczerwi.flaresobserver;
 
-import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import java.util.List;
 
 import pl.mczerwi.flarespredict.IridiumFlare;
@@ -15,27 +17,57 @@ import pl.mczerwi.flarespredict.IridiumFlare;
 /**
  * Created by marcin on 2015-04-11.
  */
-public class FlareAdapter extends ArrayAdapter<IridiumFlare> {
+public class FlareAdapter extends RecyclerView.Adapter<FlareAdapter.ViewHolder> {
 
-    private final SimpleDateFormat sdf = new SimpleDateFormat("d.mm hh:MM:ss");
+    private final DateTimeFormatter dateDayFormatter = DateTimeFormat.forPattern("dd/MM/yyyy").withZone(DateTimeZone.getDefault());
+    private final DateTimeFormatter dateHourFormatter = DateTimeFormat.forPattern("HH:mm:ss").withZone(DateTimeZone.getDefault());
+    private final List<IridiumFlare> flares;
 
-    public FlareAdapter(Context context, List<IridiumFlare> flares) {
-        super(context, R.layout.flare_row, flares);
+    public FlareAdapter(List<IridiumFlare> flares) {
+        this.flares = flares;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        View view = inflater.inflate(R.layout.flare_row, null);
+    public FlareAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+        // create a new view
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.flare_row, parent, false);
 
-        IridiumFlare flare = getItem(position);
+        // set the view's size, margins, paddings and layout parameters
+        ViewHolder vh = new ViewHolder(v);
+        return vh;
+    }
 
-        TextView dateView = (TextView) view.findViewById(R.id.flare_row_date);
-        dateView.setText(sdf.format(flare.getDate()));
+    @Override
+    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+        IridiumFlare flare = flares.get(position);
+        viewHolder.mAzimuthTextView.setText(String.valueOf(flare.getAzimuth()));
+        viewHolder.mAltitudeTextView.setText(String.valueOf(flare.getAltitude()));
+        viewHolder.mBrightnessTextView.setText(String.valueOf(flare.getBrightness()));
+        viewHolder.mDateDayTextView.setText(dateDayFormatter.print(flare.getDate()));
+        viewHolder.mDateHourTextView.setText(dateHourFormatter.print(flare.getDate()));
+    }
 
-        TextView brightnessView = (TextView) view.findViewById(R.id.flare_row_brightness);
-        brightnessView.setText(String.valueOf(flare.getBrightness()));
+    @Override
+    public int getItemCount() {
+        return flares.size();
+    }
 
-        return view;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView mBrightnessTextView;
+        public TextView mDateHourTextView;
+        public TextView mDateDayTextView;
+        public TextView mAltitudeTextView;
+        public TextView mAzimuthTextView;
+
+        public ViewHolder(View view) {
+            super(view);
+
+            mBrightnessTextView = (TextView) view.findViewById(R.id.flare_row_brightness);
+            mDateHourTextView = (TextView) view.findViewById(R.id.flare_row_date_hour);
+            mDateDayTextView = (TextView) view.findViewById(R.id.flare_row_date_day);
+            mAltitudeTextView = (TextView) view.findViewById(R.id.flare_row_altitude);
+            mAzimuthTextView = (TextView) view.findViewById(R.id.flare_row_azimuth);
+        }
     }
 }

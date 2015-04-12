@@ -8,10 +8,10 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import pl.mczerwi.flarespredict.IridiumFlare;
 import pl.mczerwi.flarespredict.IridiumFlares;
@@ -21,9 +21,7 @@ import pl.mczerwi.flarespredict.IridiumFlaresPredictorFactory;
 
 public class MainActivity extends ActionBarActivity {
 
-    private TextView view;
-    private TextView viewFlares;
-    private ListView flareListView;
+    private RecyclerView mFlareRecyclerView;
 
 
     @Override
@@ -31,10 +29,14 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        view = (TextView) findViewById(R.id.testTextView);
-        viewFlares = (TextView) findViewById(R.id.textViewFlares);
-        flareListView = (ListView) findViewById(R.id.flares_list_view);
+        mFlareRecyclerView = (RecyclerView) findViewById(R.id.flares_list_view);
+        mFlareRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        showFlaresList();
+
+    }
+
+    private void showFlaresList() {
         // Acquire a reference to the system Location Manager
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
@@ -55,11 +57,6 @@ public class MainActivity extends ActionBarActivity {
         criteria.setAltitudeRequired(true);
         criteria.setAccuracy(Criteria.ACCURACY_LOW);
         locationManager.requestSingleUpdate(criteria, locationListener, null);
-        locationManager.getBestProvider(criteria, true);
-
-
-// Register the listener with the Location Manager to receive location updates
-        locationManager.requestLocationUpdates(locationManager.getBestProvider(criteria, true), 60000, 0, locationListener);
     }
 
 
@@ -97,9 +94,9 @@ public class MainActivity extends ActionBarActivity {
         @Override
         protected void onPostExecute(IridiumFlares iridiumFlares) {
             IridiumFlare flare = iridiumFlares.getFlares().get(0);
-            view.setText("alt: " + iridiumFlares.getAltitude() + " lat: " + iridiumFlares.getLatitude() + " lnt: " + iridiumFlares.getLongitude());
-            viewFlares.setText("Flare: " + flare.getDate() + " " + flare.getAltitude() + " " + flare.getAzimuth() + " " + flare.getBrightness());
-            flareListView.setAdapter(new FlareAdapter(getBaseContext(), iridiumFlares.getFlares()));
+//            view.setText("alt: " + iridiumFlares.getAltitude() + " lat: " + iridiumFlares.getLatitude() + " lnt: " + iridiumFlares.getLongitude());
+//            viewFlares.setText("Flare: " + flare.getDate() + " " + flare.getAltitude() + " " + flare.getAzimuth() + " " + flare.getBrightness());
+            mFlareRecyclerView.setAdapter(new FlareAdapter(iridiumFlares.getFlares()));
         }
     };
 }
