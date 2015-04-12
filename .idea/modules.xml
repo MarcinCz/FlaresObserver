@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FlaresObserver.iml" filepath="$PROJECT_DIR$/FlaresObserver.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/irydicium-flares-api/flares-predict.iml" filepath="$PROJECT_DIR$/irydicium-flares-api/flares-predict.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flares-predict/flares-predict.iml" filepath="$PROJECT_DIR$/flares-predict/flares-predict.iml" />
     </modules>
   </component>
 </project>
