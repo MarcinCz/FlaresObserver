@@ -42,7 +42,7 @@ public class IridiumFlareImpl implements IridiumFlare {
         }
     }
 
-    private IridiumFlareImpl(IridiumFlareBuilder builder) {
+    IridiumFlareImpl(IridiumFlareBuilder builder) {
         this.altitude = builder.altitude;
         this.azimuth= builder.azimuth;
         this.date = builder.date;

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import org.joda.time.DateTime;
 
 import pl.mczerwi.flarespredict.IridiumFlare;
-import pl.mczerwi.flarespredict.IridiumFlareImpl;
 
 /**
  * Created by marcin on 2015-05-10.
@@ -48,7 +47,7 @@ public class ParcelableIridiumFlare implements Parcelable {
     };
 
     private ParcelableIridiumFlare(Parcel in) {
-        IridiumFlareImpl.IridiumFlareBuilder builder = new IridiumFlareImpl.IridiumFlareBuilder();
+        IridiumFlare.IridiumFlareBuilder builder = new IridiumFlare.IridiumFlareBuilder();
         builder.date((DateTime) in.readSerializable());
         builder.altitude(in.readInt());
         builder.azimuth(in.readInt());

@@ -9,7 +9,7 @@ import java.util.Locale;
 /**
  * Created by marcin on 2015-04-12.
  */
-public class HeavensAboveUtil {
+class HeavensAboveUtil {
 
     private final static DateTimeFormatter dtf = DateTimeFormat.forPattern(HeavensAboveConstants.DATE_FORMAT).withLocale(Locale.ENGLISH).withZoneUTC();
 

@@ -1,6 +1,5 @@
 package pl.mczerwi.flarespredict.heavensabove;
 
-import org.joda.time.DateTime;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -11,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import pl.mczerwi.flarespredict.IridiumFlare;
+import pl.mczerwi.flarespredict.IridiumFlareImpl;
 import pl.mczerwi.flarespredict.IridiumFlaresPredictor;
 import pl.mczerwi.flarespredict.IridiumFlaresPredictorResult;
 import pl.mczerwi.flarespredict.altitude.AltitudeProvider;
@@ -63,7 +63,7 @@ public class HeavensAbovePredictor implements IridiumFlaresPredictor {
     }
 
     private Map<String, String> getQueryParams(double latitude, double longitude, double altitude) {
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> params = new HashMap<>();
         params.put(HeavensAboveConstants.LATITUDE_PARAM, String.valueOf(latitude));
         params.put(HeavensAboveConstants.LONGITUDE_PARAM, String.valueOf(longitude));
         params.put(HeavensAboveConstants.ALTITUDE_PARAM, String.valueOf(altitude));
@@ -72,7 +72,7 @@ public class HeavensAbovePredictor implements IridiumFlaresPredictor {
     }
 
     private List<IridiumFlare> parseRows(Document doc) {
-        final List<IridiumFlare> iridiumFlares = new ArrayList<IridiumFlare>();
+        final List<IridiumFlare> iridiumFlares = new ArrayList<>();
         Elements rows = doc.select(".standardTable tr.clickableRow");
         for (Element row : rows) {
             iridiumFlares.add(parseRow(row));
@@ -83,31 +83,12 @@ public class HeavensAbovePredictor implements IridiumFlaresPredictor {
 
     private IridiumFlare parseRow(Element row) {
         try {
-            final DateTime date = HeavensAboveUtil.parseDateFromString(row.child(0).text());
-            final double brightness = Double.parseDouble(row.child(1).text());
-            final int altitude = Integer.parseInt(row.child(2).text().replaceAll("[^0-9]", ""));
-            final int azimuth = Integer.parseInt(row.child(3).text().replaceAll("[^0-9]", ""));
-            return new IridiumFlare() {
-                @Override
-                public double getBrightness() {
-                    return brightness;
-                }
-
-                @Override
-                public int getAltitude() {
-                    return altitude;
-                }
-
-                @Override
-                public int getAzimuth() {
-                    return azimuth;
-                }
-
-                @Override
-                public DateTime getDate() {
-                    return date;
-                }
-            };
+            IridiumFlareImpl.IridiumFlareBuilder builder = new IridiumFlareImpl.IridiumFlareBuilder();
+            builder.brightness(Double.parseDouble(row.child(1).text()));
+            builder.altitude(Integer.parseInt(row.child(2).text().replaceAll("[^0-9]", "")));
+            builder.azimuth(Integer.parseInt(row.child(3).text().replaceAll("[^0-9]", "")));
+            builder.date(HeavensAboveUtil.parseDateFromString(row.child(0).text()));
+            return builder.build();
         } catch (Throwable e) {
             throw new IllegalStateException("Error while parsing html row with flare information", e);
         }
