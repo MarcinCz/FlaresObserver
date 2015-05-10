@@ -8,6 +8,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,14 +27,16 @@ import pl.mczerwi.flarespredict.IridiumFlaresPredictorResult;
 /**
  * Created by marcin on 2015-05-10.
  */
-public class FlaresFragment extends Fragment {
+public class FlaresFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     private static final String FLARES = "flares";
 
+    private static FlaresFragment INSTANCE;
+
     private AbsListView mFlareListView;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private List<IridiumFlare> mFlaresList;
 
-    private static FlaresFragment INSTANCE;
 
     public static FlaresFragment getInstance() {
         if(INSTANCE == null) {
@@ -59,7 +63,8 @@ public class FlaresFragment extends Fragment {
 
         mFlareListView = (AbsListView) view.findViewById(R.id.flares_list_view);
 
-        mFlareListView.setEmptyView(view.findViewById(android.R.id.empty));
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.flares_swipe_container);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
 
 //        mProgressView = (ProgressBar) view.findViewById(android.R.id.progress);
 
@@ -102,6 +107,18 @@ public class FlaresFragment extends Fragment {
 
     }
 
+
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+               showFlaresList(true);
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        }, 500);
+    }
+
     private void showFlaresList(boolean forceRefresh) {
 
         if(forceRefresh == false && mFlaresList != null) {
@@ -130,6 +147,7 @@ public class FlaresFragment extends Fragment {
         criteria.setAccuracy(Criteria.ACCURACY_LOW);
         locationManager.requestSingleUpdate(criteria, locationListener, null);
     }
+
 
     private class ShowFlaresPredictionsTask extends AsyncTask<Location, Void, Boolean> {
 
