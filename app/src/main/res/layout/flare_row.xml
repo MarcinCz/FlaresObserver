@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:textColor="@color/blue_grey_secondary_text"
-                android:text="88"
+                android:text="88°"
                 android:id="@+id/flare_row_altitude"/>
         </LinearLayout>
 
@@ -91,7 +91,7 @@
                 android:textSize="12sp"
                 android:id="@+id/flare_row_azimuth"
                 android:textColor="@color/blue_grey_secondary_text"
-                android:text="111"/>
+                android:text="111°"/>
         </LinearLayout>
 
     </LinearLayout>

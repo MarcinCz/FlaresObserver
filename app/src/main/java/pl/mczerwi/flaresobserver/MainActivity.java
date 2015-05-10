@@ -8,8 +8,9 @@ import android.view.MenuItem;
 
 import pl.mczerwi.flaresobserver.flares.FlaresFragment;
 
-
 public class MainActivity extends AppCompatActivity {
+
+    private FlaresFragment mFlaresFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,10 +18,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FragmentManager fragmentManager = getFragmentManager();
+        mFlaresFragment = (FlaresFragment) fragmentManager.findFragmentByTag(FlaresFragment.TAG);
+        if(mFlaresFragment == null) {
+            mFlaresFragment = FlaresFragment.newInstance();
+        }
         fragmentManager.beginTransaction()
-                .replace(R.id.container, FlaresFragment.getInstance())
+                .replace(R.id.container, mFlaresFragment, FlaresFragment.TAG)
                 .commit();
-
     }
 
     @Override

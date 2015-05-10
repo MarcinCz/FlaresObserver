@@ -32,22 +32,21 @@ import pl.mczerwi.flarespredict.IridiumFlaresPredictorResult;
  */
 public class FlaresFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
-    private static final String FLARES = "flares";
+    public static final String TAG = "flaresFragment";
 
-    private static FlaresFragment INSTANCE;
+    private static final String FLARES = "flares";
 
     private AbsListView mFlareListView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private List<IridiumFlare> mFlaresList;
     private ProgressBar mProgressView;
 
-    public static FlaresFragment getInstance() {
-        if(INSTANCE == null) {
-            INSTANCE = new FlaresFragment();
-            Bundle args = new Bundle();
-            INSTANCE.setArguments(args);
-        }
-        return INSTANCE;
+    public static FlaresFragment newInstance() {
+        FlaresFragment instance = new FlaresFragment();
+        Bundle args = new Bundle();
+        instance.setArguments(args);
+
+        return instance;
     }
 
     public FlaresFragment() {
@@ -98,7 +97,6 @@ public class FlaresFragment extends Fragment implements SwipeRefreshLayout.OnRef
     @Override
     public void onStart() {
         super.onStart();
-        showProgress(true);
         showFlaresList(false);
     }
 
@@ -157,6 +155,7 @@ public class FlaresFragment extends Fragment implements SwipeRefreshLayout.OnRef
             mFlareListView.setAdapter(new FlaresAdapter(getActivity(), android.R.layout.simple_list_item_1, mFlaresList));
             return;
         }
+        showProgress(true);
 
         // Acquire a reference to the system Location Manager
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);

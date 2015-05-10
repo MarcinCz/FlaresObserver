@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import pl.mczerwi.flarespredict.IridiumFlare;
-import pl.mczerwi.flarespredict.IridiumFlareImpl;
 import pl.mczerwi.flarespredict.IridiumFlaresPredictor;
 import pl.mczerwi.flarespredict.IridiumFlaresPredictorResult;
 import pl.mczerwi.flarespredict.altitude.AltitudeProvider;
@@ -83,7 +82,7 @@ public class HeavensAbovePredictor implements IridiumFlaresPredictor {
 
     private IridiumFlare parseRow(Element row) {
         try {
-            IridiumFlareImpl.IridiumFlareBuilder builder = new IridiumFlareImpl.IridiumFlareBuilder();
+            IridiumFlare.IridiumFlareBuilder builder = new IridiumFlare.IridiumFlareBuilder();
             builder.brightness(Double.parseDouble(row.child(1).text()));
             builder.altitude(Integer.parseInt(row.child(2).text().replaceAll("[^0-9]", "")));
             builder.azimuth(Integer.parseInt(row.child(3).text().replaceAll("[^0-9]", "")));

@@ -45,8 +45,8 @@ public class FlaresAdapter extends ArrayAdapter<IridiumFlare> {
         }
 
         IridiumFlare flare = mFlares.get(position);
-        viewHolder.mAzimuthTextView.setText(String.valueOf(flare.getAzimuth()));
-        viewHolder.mAltitudeTextView.setText(String.valueOf(flare.getAltitude()));
+        viewHolder.mAzimuthTextView.setText(String.valueOf(flare.getAzimuth()) + "°");
+        viewHolder.mAltitudeTextView.setText(String.valueOf(flare.getAltitude()) + "°");
         viewHolder.mBrightnessTextView.setText(String.valueOf(flare.getBrightness()));
         viewHolder.mDateDayTextView.setText(mDateDayFormatter.print(flare.getDate()));
         viewHolder.mDateHourTextView.setText(mDateHourFormatter.print(flare.getDate()));
