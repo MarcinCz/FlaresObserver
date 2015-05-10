@@ -9,10 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import pl.mczerwi.flarespredict.IridiumFlare;
@@ -32,8 +29,12 @@ public class HeavensAbovePredictorTest_local extends HeavensAbovePredictorTestBa
         assertEquals(-3.6, firstFlare.getBrightness(), 1);
         assertEquals(35, firstFlare.getAltitude());
         assertEquals(58, firstFlare.getAzimuth());
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(HeavensAboveConstants.DATE_FORMAT, Locale.ENGLISH);
-        assertEquals(LocalDate.parse("Apr 11, 21:58:54", dateTimeFormatter), firstFlare.getDate());
+        assertEquals(2016, firstFlare.getDate().getYear());
+        assertEquals(4, firstFlare.getDate().getMonthOfYear());
+        assertEquals(11, firstFlare.getDate().getDayOfMonth());
+        assertEquals(21, firstFlare.getDate().getHourOfDay());
+        assertEquals(58, firstFlare.getDate().getMinuteOfHour());
+        assertEquals(54, firstFlare.getDate().getSecondOfMinute());
 
     }
 

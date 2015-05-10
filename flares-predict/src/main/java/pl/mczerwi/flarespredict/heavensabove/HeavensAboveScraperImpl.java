@@ -12,7 +12,7 @@ public class HeavensAboveScraperImpl implements HeavensAboveScraper {
     @Override
     public Document getPage(Map<String, String> params) {
         try {
-            return Jsoup.connect("http://www.heavens-above.com/IridiumFlares.aspx")
+            return Jsoup.connect(HeavensAboveConstants.PAGE_URL)
                     .data(params)
                     .get();
         } catch (Throwable e) {

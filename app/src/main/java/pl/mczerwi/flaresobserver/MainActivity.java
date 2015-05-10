@@ -8,10 +8,9 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import pl.mczerwi.flarespredict.IridiumFlare;
 import pl.mczerwi.flarespredict.IridiumFlares;
@@ -21,7 +20,7 @@ import pl.mczerwi.flarespredict.IridiumFlaresPredictorFactory;
 
 public class MainActivity extends ActionBarActivity {
 
-    private RecyclerView mFlareRecyclerView;
+    private ListView mFlareListView;
 
 
     @Override
@@ -29,8 +28,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mFlareRecyclerView = (RecyclerView) findViewById(R.id.flares_list_view);
-        mFlareRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mFlareListView = (ListView) findViewById(R.id.flares_list_view);
 
         showFlaresList();
 
@@ -96,7 +94,7 @@ public class MainActivity extends ActionBarActivity {
             IridiumFlare flare = iridiumFlares.getFlares().get(0);
 //            view.setText("alt: " + iridiumFlares.getAltitude() + " lat: " + iridiumFlares.getLatitude() + " lnt: " + iridiumFlares.getLongitude());
 //            viewFlares.setText("Flare: " + flare.getDate() + " " + flare.getAltitude() + " " + flare.getAzimuth() + " " + flare.getBrightness());
-            mFlareRecyclerView.setAdapter(new FlareAdapter(iridiumFlares.getFlares()));
+            mFlareListView.setAdapter(new FlareAdapter(MainActivity.this, android.R.layout.simple_list_item_1, iridiumFlares.getFlares()));
         }
     };
 }
