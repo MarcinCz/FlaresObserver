@@ -1,4 +1,4 @@
-package pl.mczerwi.flaresobserver;
+package pl.mczerwi.flaresobserver.flares;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,20 +13,21 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.util.List;
 
+import pl.mczerwi.flaresobserver.R;
 import pl.mczerwi.flarespredict.IridiumFlare;
 
 /**
  * Created by marcin on 2015-04-11.
  */
-public class FlareAdapter extends ArrayAdapter<IridiumFlare> {
+public class FlaresAdapter extends ArrayAdapter<IridiumFlare> {
 
-    private final DateTimeFormatter dateDayFormatter = DateTimeFormat.forPattern("dd/MM/yyyy").withZone(DateTimeZone.getDefault());
-    private final DateTimeFormatter dateHourFormatter = DateTimeFormat.forPattern("HH:mm:ss").withZone(DateTimeZone.getDefault());
-    private final List<IridiumFlare> flares;
+    private final DateTimeFormatter mDateDayFormatter = DateTimeFormat.forPattern("dd/MM/yyyy").withZone(DateTimeZone.getDefault());
+    private final DateTimeFormatter mDateHourFormatter = DateTimeFormat.forPattern("HH:mm:ss").withZone(DateTimeZone.getDefault());
+    private final List<IridiumFlare> mFlares;
 
-    public FlareAdapter(Context context, int textViewResourceId, List<IridiumFlare> objects) {
+    public FlaresAdapter(Context context, int textViewResourceId, List<IridiumFlare> objects) {
         super(context, textViewResourceId, objects);
-        this.flares = objects;
+        this.mFlares = objects;
     }
 
     @Override
@@ -43,12 +44,12 @@ public class FlareAdapter extends ArrayAdapter<IridiumFlare> {
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        IridiumFlare flare = flares.get(position);
+        IridiumFlare flare = mFlares.get(position);
         viewHolder.mAzimuthTextView.setText(String.valueOf(flare.getAzimuth()));
         viewHolder.mAltitudeTextView.setText(String.valueOf(flare.getAltitude()));
         viewHolder.mBrightnessTextView.setText(String.valueOf(flare.getBrightness()));
-        viewHolder.mDateDayTextView.setText(dateDayFormatter.print(flare.getDate()));
-        viewHolder.mDateHourTextView.setText(dateHourFormatter.print(flare.getDate()));
+        viewHolder.mDateDayTextView.setText(mDateDayFormatter.print(flare.getDate()));
+        viewHolder.mDateHourTextView.setText(mDateHourFormatter.print(flare.getDate()));
         return view;
 
     }

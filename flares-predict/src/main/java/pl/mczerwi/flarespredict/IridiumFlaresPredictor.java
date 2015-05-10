@@ -7,6 +7,6 @@ public interface IridiumFlaresPredictor {
     /**
      * Predict based on latitude and longitude. Altitude is automatically checked for given location.
      */
-    public IridiumFlares predict(double latitude, double longitude);
-    public IridiumFlares predict(double latitude, double longitude, double altitude);
+    public IridiumFlaresPredictorResult predict(double latitude, double longitude);
+    public IridiumFlaresPredictorResult predict(double latitude, double longitude, double altitude);
 }

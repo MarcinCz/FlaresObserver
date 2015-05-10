@@ -6,7 +6,7 @@ import java.text.ParseException;
 import java.util.List;
 
 import pl.mczerwi.flarespredict.IridiumFlare;
-import pl.mczerwi.flarespredict.IridiumFlares;
+import pl.mczerwi.flarespredict.IridiumFlaresPredictorResult;
 import pl.mczerwi.flarespredict.altitude.AltitudeProvider;
 
 import static org.junit.Assert.assertEquals;
@@ -19,7 +19,7 @@ public abstract class HeavensAbovePredictorTestBase {
     @Test
     public void shouldGetFlares() throws ParseException {
         HeavensAbovePredictor predictor = new HeavensAbovePredictor(getScraper(), getAltitudeProvider());
-        IridiumFlares flares = predictor.predict(51.40274, 21.1471, 0);
+        IridiumFlaresPredictorResult flares = predictor.predict(51.40274, 21.1471, 0);
 
         assertEquals(51.40274, flares.getLatitude(), 1);
         assertEquals(21.1471, flares.getLongitude(), 1);

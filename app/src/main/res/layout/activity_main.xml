@@ -4,12 +4,9 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
-    <ListView
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/blue_grey_background"
-        android:id="@+id/flares_list_view"/>
-
+        android:layout_height="match_parent" />
 
 </LinearLayout>

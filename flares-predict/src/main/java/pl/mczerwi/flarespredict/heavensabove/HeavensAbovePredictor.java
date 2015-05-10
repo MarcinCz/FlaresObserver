@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 import pl.mczerwi.flarespredict.IridiumFlare;
-import pl.mczerwi.flarespredict.IridiumFlares;
 import pl.mczerwi.flarespredict.IridiumFlaresPredictor;
+import pl.mczerwi.flarespredict.IridiumFlaresPredictorResult;
 import pl.mczerwi.flarespredict.altitude.AltitudeProvider;
 
 public class HeavensAbovePredictor implements IridiumFlaresPredictor {
@@ -29,17 +29,17 @@ public class HeavensAbovePredictor implements IridiumFlaresPredictor {
     }
 
     @Override
-    public IridiumFlares predict(double latitude, double longitude) {
+    public IridiumFlaresPredictorResult predict(double latitude, double longitude) {
         return predict(latitude, longitude, altitudeProvider.getAltitude(latitude, longitude));
     }
 
     @Override
-    public IridiumFlares predict(final double latitude, final double longitude, final double altitude) {
+    public IridiumFlaresPredictorResult predict(final double latitude, final double longitude, final double altitude) {
 
         Document doc = scraper.getPage(getQueryParams(latitude, longitude, altitude));
         final List<IridiumFlare> iridiumFlares = parseRows(doc);
 
-        return new IridiumFlares() {
+        return new IridiumFlaresPredictorResult() {
             @Override
             public List<IridiumFlare> getFlares() {
                 return iridiumFlares;

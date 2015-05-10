@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by marcin on 2015-04-09.
  */
-public interface IridiumFlares {
+public interface IridiumFlaresPredictorResult {
 
     public List<IridiumFlare> getFlares();
     public double getLatitude();
