@@ -35,7 +35,7 @@ public class FlaresAdapter extends ArrayAdapter<IridiumFlare> {
         ViewHolder viewHolder;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.flare_row, null);
+            view = inflater.inflate(R.layout.fragment_flares_row, null);
 
             viewHolder = new ViewHolder(view);
 

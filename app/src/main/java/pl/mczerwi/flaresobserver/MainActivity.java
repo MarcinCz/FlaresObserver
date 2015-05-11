@@ -1,30 +1,32 @@
 package pl.mczerwi.flaresobserver;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import pl.mczerwi.flaresobserver.flares.FlaresFragment;
+import pl.mczerwi.flaresobserver.skypointer.SkyPointerFragment;
+import pl.mczerwi.flarespredict.IridiumFlare;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FlaresFragment.OnIridiumFlareSelectedListener{
 
-    private FlaresFragment mFlaresFragment;
+    private enum FragmentEnum {
+        FLARES,
+        SKY_POINTER;
+    }
+
+    private FragmentEnum mCurrentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FragmentManager fragmentManager = getFragmentManager();
-        mFlaresFragment = (FlaresFragment) fragmentManager.findFragmentByTag(FlaresFragment.TAG);
-        if(mFlaresFragment == null) {
-            mFlaresFragment = FlaresFragment.newInstance();
-        }
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, mFlaresFragment, FlaresFragment.TAG)
-                .commit();
+       showFlaresFragment();
     }
 
     @Override
@@ -49,4 +51,33 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onIridiumFlareSelected(IridiumFlare flare) {
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = FragmentFactory.getInstance().getSkyPointerFragment(flare);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.add(R.id.container, fragment, SkyPointerFragment.TAG);
+            transaction.hide(FragmentFactory.getInstance().getFlaresFragment(fragmentManager));
+            transaction.addToBackStack(null);
+            transaction.commit();
+        mCurrentFragment = FragmentEnum.SKY_POINTER;
+    }
+
+    private void showFlaresFragment() {
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = FragmentFactory.getInstance().getFlaresFragment(getFragmentManager());
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment, FlaresFragment.TAG)
+                .commit();
+        mCurrentFragment = FragmentEnum.FLARES;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }
