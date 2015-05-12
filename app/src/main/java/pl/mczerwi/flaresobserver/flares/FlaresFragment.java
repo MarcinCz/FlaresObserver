@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.mczerwi.flaresobserver.R;
+import pl.mczerwi.flaresobserver.model.ParcelableIridiumFlare;
 import pl.mczerwi.flarespredict.IridiumFlare;
 import pl.mczerwi.flarespredict.IridiumFlaresPredictor;
 import pl.mczerwi.flarespredict.IridiumFlaresPredictorFactory;
@@ -134,7 +135,6 @@ public class FlaresFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
     }
 
-
     @Override
     public void onRefresh() {
         new Handler().postDelayed(new Runnable() {
@@ -145,6 +145,7 @@ public class FlaresFragment extends Fragment implements SwipeRefreshLayout.OnRef
             }
         }, 500);
     }
+
 
     /**
      * Shows the progress UI and hides the list.

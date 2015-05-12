@@ -17,10 +17,11 @@ public class IridiumFlaresPredictorStub implements IridiumFlaresPredictor {
     @Override
     public IridiumFlaresPredictorResult predict(double latitude, double longitude, double altitude) {
         final List<IridiumFlare> flares = new ArrayList<>();
+
         for(int i = 0; i < 10; i++) {
             IridiumFlare.IridiumFlareBuilder builder = new IridiumFlare.IridiumFlareBuilder();
             builder.altitude(i*10);
-            builder.azimuth((10 - i) * 10);
+            builder.azimuth((10 - i) * 20);
             builder.brightness(i);
             builder.date(DateTime.now());
             flares.add(builder.build());

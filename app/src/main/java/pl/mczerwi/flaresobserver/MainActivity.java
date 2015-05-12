@@ -3,6 +3,7 @@ package pl.mczerwi.flaresobserver;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -16,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements FlaresFragment.On
 
     private enum FragmentEnum {
         FLARES,
-        SKY_POINTER;
+        SKY_POINTER
     }
 
     private FragmentEnum mCurrentFragment;
@@ -26,7 +27,18 @@ public class MainActivity extends AppCompatActivity implements FlaresFragment.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       showFlaresFragment();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        getFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+//                if(getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED) {
+//                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//                } else {
+//                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+//                }
+            }
+        });
+        showFlaresFragment();
     }
 
     @Override
@@ -53,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements FlaresFragment.On
 
     @Override
     public void onIridiumFlareSelected(IridiumFlare flare) {
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = FragmentFactory.getInstance().getSkyPointerFragment(flare);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -76,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements FlaresFragment.On
     public void onBackPressed() {
         if(getFragmentManager().getBackStackEntryCount() > 0) {
             getFragmentManager().popBackStack();
+//            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         } else {
             super.onBackPressed();
         }

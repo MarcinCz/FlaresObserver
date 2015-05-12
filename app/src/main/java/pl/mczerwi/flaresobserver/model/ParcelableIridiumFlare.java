@@ -1,4 +1,4 @@
-package pl.mczerwi.flaresobserver.flares;
+package pl.mczerwi.flaresobserver.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
