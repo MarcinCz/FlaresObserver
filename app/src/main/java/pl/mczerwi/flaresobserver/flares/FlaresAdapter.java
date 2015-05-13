@@ -1,6 +1,7 @@
 package pl.mczerwi.flaresobserver.flares;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +20,17 @@ import pl.mczerwi.flarespredict.IridiumFlare;
 /**
  * Created by marcin on 2015-04-11.
  */
-public class FlaresAdapter extends ArrayAdapter<IridiumFlare> {
+class FlaresAdapter extends ArrayAdapter<IridiumFlare> {
 
     private final DateTimeFormatter mDateDayFormatter = DateTimeFormat.forPattern("dd/MM/yyyy").withZone(DateTimeZone.getDefault());
     private final DateTimeFormatter mDateHourFormatter = DateTimeFormat.forPattern("HH:mm:ss").withZone(DateTimeZone.getDefault());
     private final List<IridiumFlare> mFlares;
+    private final Context mContext;
 
     public FlaresAdapter(Context context, int textViewResourceId, List<IridiumFlare> objects) {
         super(context, textViewResourceId, objects);
         this.mFlares = objects;
+        this.mContext = context;
     }
 
     @Override
@@ -50,8 +53,27 @@ public class FlaresAdapter extends ArrayAdapter<IridiumFlare> {
         viewHolder.mBrightnessTextView.setText(String.valueOf(flare.getBrightness()));
         viewHolder.mDateDayTextView.setText(mDateDayFormatter.print(flare.getDate()));
         viewHolder.mDateHourTextView.setText(mDateHourFormatter.print(flare.getDate()));
+
+        GradientDrawable bgShape = (GradientDrawable)viewHolder.mBrightnessTextView.getBackground();
+        bgShape.setColor(getColorBasedOnBrightness(flare.getBrightness()));
         return view;
 
+    }
+
+    private int getColorBasedOnBrightness(double brightness) {
+        int color;
+        if(brightness > 0) {
+            color = R.color.blue_grey_background_yellow;
+        } else if (brightness > -2) {
+            color = R.color.blue_grey_background_amber;
+        } else if (brightness > -4) {
+            color = R.color.blue_grey_background_orange;
+        } else if (brightness > -6) {
+            color = R.color.blue_grey_background_deep_orange;
+        } else {
+            color = R.color.blue_grey_background_red;
+        }
+        return mContext.getResources().getColor(color);
     }
 
 

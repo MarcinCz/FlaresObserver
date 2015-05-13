@@ -11,7 +11,7 @@ class SphereHelper {
 
     /**
      * Calculates great-circle distance based on angles in degrees.
-     * Return
+     * Return distance in radians
      */
     public static double getGreatCircleDistance(double altitude1, double altitude2, double azimuth1, double azimuth2) {
         altitude1 = Math.toRadians(altitude1);

@@ -2,16 +2,7 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="android:actionBarStyle">@style/BlueGreyActionBar</item>
-    </style>
-
-    <!-- ActionBar styles -->
-    <style name="BlueGreyActionBar"
-    parent="Base.ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:colorPrimary">@color/blue_grey_primary</item>
 
     </style>
-
 
 </resources>

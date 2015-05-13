@@ -22,7 +22,7 @@ public class IridiumFlaresPredictorStub implements IridiumFlaresPredictor {
             IridiumFlare.IridiumFlareBuilder builder = new IridiumFlare.IridiumFlareBuilder();
             builder.altitude(i*10);
             builder.azimuth((10 - i) * 20);
-            builder.brightness(i);
+            builder.brightness(i - 8);
             builder.date(DateTime.now());
             flares.add(builder.build());
         }

@@ -9,7 +9,7 @@ import pl.mczerwi.flarespredict.IridiumFlare;
 /**
  * Created by marcin on 2015-05-11.
  */
-class FragmentFactory
+public class FragmentFactory
 {
 
     private FlaresFragment mFlaresFragment;
@@ -20,7 +20,7 @@ class FragmentFactory
         return instance;
     }
 
-    private FragmentFactory(){};
+    private FragmentFactory(){}
 
     public FlaresFragment getFlaresFragment(FragmentManager fragmentManager) {
         mFlaresFragment = (FlaresFragment) fragmentManager.findFragmentByTag(FlaresFragment.TAG);

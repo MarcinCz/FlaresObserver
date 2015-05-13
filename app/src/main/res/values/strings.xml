@@ -6,4 +6,5 @@
     <string name="flare_row_altitude">Altitude:</string>
     <string name="flare_row_azimuth">Azimuth:</string>
     <string name="no_data">No data</string>
+    <string name="title_activity_sky_pointer">Sky Pointer</string>
 </resources>

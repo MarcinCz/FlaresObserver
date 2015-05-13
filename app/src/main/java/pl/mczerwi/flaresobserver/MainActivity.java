@@ -2,42 +2,25 @@ package pl.mczerwi.flaresobserver;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.pm.ActivityInfo;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import pl.mczerwi.flaresobserver.flares.FlaresFragment;
-import pl.mczerwi.flaresobserver.skypointer.SkyPointerFragment;
+import pl.mczerwi.flaresobserver.model.ParcelableIridiumFlare;
+import pl.mczerwi.flaresobserver.skypointer.SkyPointerActivity;
 import pl.mczerwi.flarespredict.IridiumFlare;
 
 public class MainActivity extends AppCompatActivity implements FlaresFragment.OnIridiumFlareSelectedListener{
 
-    private enum FragmentEnum {
-        FLARES,
-        SKY_POINTER
-    }
-
-    private FragmentEnum mCurrentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-        getFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-//                if(getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED) {
-//                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//                } else {
-//                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-//                }
-            }
-        });
         showFlaresFragment();
     }
 
@@ -65,31 +48,23 @@ public class MainActivity extends AppCompatActivity implements FlaresFragment.On
 
     @Override
     public void onIridiumFlareSelected(IridiumFlare flare) {
-//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment = FragmentFactory.getInstance().getSkyPointerFragment(flare);
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.add(R.id.container, fragment, SkyPointerFragment.TAG);
-            transaction.hide(FragmentFactory.getInstance().getFlaresFragment(fragmentManager));
-            transaction.addToBackStack(null);
-            transaction.commit();
-        mCurrentFragment = FragmentEnum.SKY_POINTER;
+        Intent intent = new Intent(MainActivity.this, SkyPointerActivity.class);
+        intent.putExtra(getString(R.string.EXTRA_FLARE), new ParcelableIridiumFlare(flare));
+        startActivity(intent);
     }
 
     private void showFlaresFragment() {
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = FragmentFactory.getInstance().getFlaresFragment(getFragmentManager());
         fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment, FlaresFragment.TAG)
+                .replace(R.id.activity_main_container, fragment, FlaresFragment.TAG)
                 .commit();
-        mCurrentFragment = FragmentEnum.FLARES;
     }
 
     @Override
     public void onBackPressed() {
         if(getFragmentManager().getBackStackEntryCount() > 0) {
             getFragmentManager().popBackStack();
-//            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         } else {
             super.onBackPressed();
         }

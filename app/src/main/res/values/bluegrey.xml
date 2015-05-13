@@ -9,4 +9,11 @@
     <color name="blue_grey_icons">#FFFFFF</color>
     <color name="blue_grey_divider">#B6B6B6</color>
     <color name="blue_grey_background">#FFFFFF</color>
+    <color name="blue_grey_white_text">#FFFFFF</color>
+    <color name="blue_grey_background_yellow">#FFEB3B</color>
+    <color name="blue_grey_background_amber">#FFC107</color>
+    <color name="blue_grey_background_orange">#FF9800</color>
+    <color name="blue_grey_background_deep_orange">#FF5722</color>
+    <color name="blue_grey_background_red">#E64A19</color>
+
 </resources>
