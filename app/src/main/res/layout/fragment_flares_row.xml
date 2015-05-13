@@ -32,13 +32,25 @@
             android:text="19:25:27"
             android:textStyle="bold" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="10/04/2015"
-            android:textColor="@color/blue_grey_secondary_text"
-            android:id="@+id/flare_row_date_day"/>
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_schedule_grey" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="10/04/2015"
+                android:textColor="@color/blue_grey_secondary_text"
+                android:id="@+id/flare_row_date_day"/>
+
+
+        </LinearLayout>
 
     </LinearLayout>
 
