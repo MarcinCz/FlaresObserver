@@ -1,15 +1,9 @@
-package pl.mczerwi.flaresobserver.flares;
+package pl.mczerwi.flaresobserver;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -23,12 +17,8 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.mczerwi.flaresobserver.R;
 import pl.mczerwi.flaresobserver.model.ParcelableIridiumFlare;
 import pl.mczerwi.flarespredict.IridiumFlare;
-import pl.mczerwi.flarespredict.IridiumFlaresPredictor;
-import pl.mczerwi.flarespredict.IridiumFlaresPredictorFactory;
-import pl.mczerwi.flarespredict.IridiumFlaresPredictorResult;
 
 /**
  * Created by marcin on 2015-05-10.
@@ -181,46 +171,15 @@ public class FlaresFragment extends Fragment implements SwipeRefreshLayout.OnRef
         }
         showProgress(true);
 
-        // Acquire a reference to the system Location Manager
-        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
-        // Define a listener that responds to location updates
-        LocationListener locationListener = new LocationListener() {
-            public void onLocationChanged(final Location location) {
-                ShowFlaresPredictionsTask task = new ShowFlaresPredictionsTask();
-                task.execute(location);
+        FlarePredictionTask task = new FlarePredictionTask(getActivity()) {
+            @Override
+            protected void OnPostTaskExecute(List<IridiumFlare> flares) {
+                showProgress(false);
+                mFlaresList = flares;
+                mFlareListView.setAdapter(new FlaresAdapter(getActivity(), android.R.layout.simple_list_item_1, mFlaresList));
             }
-            public void onStatusChanged(String provider, int status, Bundle extras) {}
-
-            public void onProviderEnabled(String provider) {}
-
-            public void onProviderDisabled(String provider) {}
         };
-
-        Criteria criteria = new Criteria();
-        criteria.setAltitudeRequired(true);
-        criteria.setAccuracy(Criteria.ACCURACY_LOW);
-        locationManager.requestSingleUpdate(criteria, locationListener, null);
+        task.execute();
     }
 
-
-    private class ShowFlaresPredictionsTask extends AsyncTask<Location, Void, Boolean> {
-
-        @Override
-        protected Boolean doInBackground(Location... params) {
-            Location location = params[0];
-            IridiumFlaresPredictor predictor = IridiumFlaresPredictorFactory.getInstance();
-            IridiumFlaresPredictorResult result = predictor.predict(location.getLatitude(), location.getLongitude());
-            mFlaresList = result.getFlares();
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean bool) {
-            super.onPostExecute(bool);
-            showProgress(false);
-
-            mFlareListView.setAdapter(new FlaresAdapter(getActivity(), android.R.layout.simple_list_item_1, mFlaresList));
-        }
-    }
 }

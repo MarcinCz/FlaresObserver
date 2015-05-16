@@ -1,4 +1,4 @@
-package pl.mczerwi.flaresobserver.flares;
+package pl.mczerwi.flaresobserver;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
@@ -14,7 +14,6 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.util.List;
 
-import pl.mczerwi.flaresobserver.R;
 import pl.mczerwi.flarespredict.IridiumFlare;
 
 /**

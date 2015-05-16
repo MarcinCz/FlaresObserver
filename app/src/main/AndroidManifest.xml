@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +14,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,11 +25,23 @@
             android:name=".skypointer.SkyPointerActivity"
             android:label="@string/title_activity_sky_pointer"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pl.mczerwi.flaresobserver.MainActivity" />
         </activity>
+        <activity android:name="SettingsActivity">
+        </activity>
+
+        <receiver android:name=".notifications.FlarePredictionReceiver" >
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.BOOT_COMPLETED" /> -->
+            <!-- </intent-filter> -->
+        </receiver>
+        <receiver android:name=".notifications.FlareNotificationReceiver" />
+
+
     </application>
 
 </manifest>

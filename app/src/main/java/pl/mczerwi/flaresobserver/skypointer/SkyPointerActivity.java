@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import pl.mczerwi.flaresobserver.FragmentFactory;
 import pl.mczerwi.flaresobserver.R;
 import pl.mczerwi.flaresobserver.model.ParcelableIridiumFlare;
 
@@ -27,7 +26,7 @@ public class SkyPointerActivity extends AppCompatActivity {
         ParcelableIridiumFlare parcelableIridiumFlare = getIntent().getExtras().getParcelable(getString(R.string.EXTRA_FLARE));
 
         FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment = FragmentFactory.getInstance().getSkyPointerFragment(parcelableIridiumFlare.getIridiumFlare());
+        Fragment fragment = SkyPointerFragment.newInstance(parcelableIridiumFlare.getIridiumFlare());
         fragmentManager.beginTransaction()
                 .replace(R.id.activity_sky_pointer_container, fragment, SkyPointerFragment.TAG)
                 .commit();

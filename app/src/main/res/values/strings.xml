@@ -7,4 +7,9 @@
     <string name="flare_row_azimuth">Azimuth:</string>
     <string name="no_data">No data</string>
     <string name="title_activity_sky_pointer">Sky Pointer</string>
+
+    <string name="flare_prediction_notification_title_template">Flare prediction: %1$s</string>
+    <string name="flare_notification_notification_title_template">Flare prediction: %1$s</string>
+
+    <string name="pref_show_notifications">Show flare notifications</string>
 </resources>
