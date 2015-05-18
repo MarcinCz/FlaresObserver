@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by marcin on 2015-05-10.
  */
-public class IridiumFlaresPredictorStub implements IridiumFlaresPredictor {
+class IridiumFlaresPredictorStub implements IridiumFlaresPredictor {
     @Override
     public IridiumFlaresPredictorResult predict(double latitude, double longitude) {
         return predict(latitude, longitude, 300);

@@ -11,7 +11,7 @@ public class IridiumFlaresPredictorFactory {
 
     public static IridiumFlaresPredictor getInstance() {
         HeavensAbovePredictor heavensAbovePredictor = new HeavensAbovePredictor(new HeavensAboveScraperImpl(), new GoogleAltitudeProvider());
-//        return new HeavensAbovePredictor(new HeavensAboveScraperImpl(), new GoogleAltitudeProvider());
-        return new IridiumFlaresPredictorStub();
+        return new HeavensAbovePredictor(new HeavensAboveScraperImpl(), new GoogleAltitudeProvider());
+//        return new IridiumFlaresPredictorStub();
     }
 }

@@ -2,11 +2,13 @@ package pl.mczerwi.flarespredict.heavensabove;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.Hours;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class HeavensAboveUtilTest {
 
@@ -30,8 +32,12 @@ public class HeavensAboveUtilTest {
 
     @Test
     public void shouldPrintDateWithTimeZone() {
-        DateTime date = HeavensAboveUtil.parseDateFromString("Apr 12, 21:59:58");
+        DateTime date = HeavensAboveUtil.parseDateFromString("May 19, 21:59:58");
+        DateTime now = DateTime.now();
+        System.out.println("Getting hour difference: " + date + now);
+        System.out.println(Hours.hoursBetween(date, now).getHours());
         DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-MM-yyyy HH:mm:ss");
         System.out.println(dtf.withZone(DateTimeZone.getDefault()).print(date));
+        assertTrue(true);
     }
 }

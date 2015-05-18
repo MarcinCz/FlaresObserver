@@ -13,6 +13,7 @@ import android.view.WindowManager;
 
 import pl.mczerwi.flaresobserver.model.ParcelableIridiumFlare;
 import pl.mczerwi.flaresobserver.notifications.FlarePredictionReceiver;
+import pl.mczerwi.flaresobserver.settings.SettingsActivity;
 import pl.mczerwi.flaresobserver.skypointer.SkyPointerActivity;
 import pl.mczerwi.flarespredict.IridiumFlare;
 

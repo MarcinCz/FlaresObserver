@@ -61,13 +61,10 @@ public abstract class FlarePredictionTask extends AsyncTask<Location, Void, List
         super.onPreExecute();
     }
 
-    protected abstract void OnPostTaskExecute(List<IridiumFlare> flares);
+    protected abstract void onPostTaskExecute(List<IridiumFlare> flares);
 
     @Override
     protected void onPostExecute(List<IridiumFlare> flares) {
-        OnPostTaskExecute(flares);
-//        showProgress(false);
-//        mFlaresList = flares;
-//        mFlareListView.setAdapter(new FlaresAdapter(getActivity(), android.R.layout.simple_list_item_1, mFlaresList));
+        onPostTaskExecute(flares);
     }
 }

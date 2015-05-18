@@ -30,7 +30,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pl.mczerwi.flaresobserver.MainActivity" />
         </activity>
-        <activity android:name="SettingsActivity">
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:label="@string/title_activity_settings"            >
         </activity>
 
         <receiver android:name=".notifications.FlarePredictionReceiver" >

@@ -5,19 +5,21 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.SystemClock;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.Hours;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pl.mczerwi.flaresobserver.FlarePredictionTask;
 import pl.mczerwi.flaresobserver.R;
-import pl.mczerwi.flaresobserver.SettingsActivity;
 import pl.mczerwi.flaresobserver.model.ParcelableIridiumFlare;
+import pl.mczerwi.flaresobserver.settings.NotificationSettings;
+import pl.mczerwi.flaresobserver.settings.NotificationSettingsProvider;
 import pl.mczerwi.flarespredict.IridiumFlare;
 
 /**
@@ -25,9 +27,11 @@ import pl.mczerwi.flarespredict.IridiumFlare;
  */
 public class FlarePredictionReceiver extends BroadcastReceiver {
 
+    private final static int INTERVAL_HOURS = 6;
+
     private static AlarmManager mAlarmManager;
     private static PendingIntent mPredictionPendingIntent;
-    private static PendingIntent mNotificationPendingIntent;
+    private static List<PendingIntent> mNotificationPendingIntents = new ArrayList<>();
 
     @Override
     public void onReceive(final Context context, Intent intent) {
@@ -35,19 +39,33 @@ public class FlarePredictionReceiver extends BroadcastReceiver {
 
         FlarePredictionTask task = new FlarePredictionTask(context) {
             @Override
-            protected void OnPostTaskExecute(List<IridiumFlare> flares) {
-                if(flares.size() > 0) {
+            protected void onPostTaskExecute(List<IridiumFlare> flares) {
+                if(flares.size() < 0) {
+                    return;
+                }
+
+                cancelNotificationPendingIntents();
+
+                int requestId = 0;
+                DateTime dateNow = DateTime.now();
+                for(IridiumFlare flare: flares) {
+                    if(Hours.hoursBetween(dateNow, flare.getDate()).getHours() > 2 * INTERVAL_HOURS) {
+                        break;  //notifications for flares which are more hours ahead are not set now, they will be set in the one of the next alarms received
+                    }
+
+                    ParcelableIridiumFlare parcelableIridiumFlare = new ParcelableIridiumFlare(flare);
                     Intent alarmIntent = new Intent(context, FlareNotificationReceiver.class);
-                    alarmIntent.putExtra(context.getString(R.string.EXTRA_FLARE), new ParcelableIridiumFlare(flares.get(0)));
-                    mNotificationPendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, 0);
+                    alarmIntent.putExtra(context.getString(R.string.EXTRA_FLARE), parcelableIridiumFlare);
+                    PendingIntent notificationPendingIntent = PendingIntent.getBroadcast(context, requestId++, alarmIntent, 0);
+                    mNotificationPendingIntents.add(notificationPendingIntent);
                     mAlarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-                    DateTime notificationDate = flares.get(0).getDate().withMinuteOfHour(28).withSecondOfMinute(0);
+                    DateTime notificationDate = flare.getDate().withZone(DateTimeZone.getDefault()).minusMinutes(15);
 
-                    mAlarmManager.cancel(mNotificationPendingIntent); //cancels previous notification pending intents
-                    mAlarmManager.set(AlarmManager.RTC_WAKEUP, notificationDate.getMillis(), mNotificationPendingIntent);
+                    mAlarmManager.set(AlarmManager.RTC_WAKEUP, notificationDate.getMillis(), notificationPendingIntent);
                     Log.d(getClass().getSimpleName(), "set flare notification for " + notificationDate.toString());
                 }
+
             }
         };
 
@@ -58,15 +76,13 @@ public class FlarePredictionReceiver extends BroadcastReceiver {
      * Starts alarm manager with repeating task, which checks for flares predictions every hour and schedule flare notifications
      */
     public static void enableFlarePredictionNotifications(Context context) {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean showNotifications = sharedPref.getBoolean(SettingsActivity.KEY_PREF_SHOW_NOTIFICATIONS, true);
+        NotificationSettings settings = NotificationSettingsProvider.getNotificationSettings(context);
 
-        if(showNotifications) {
+        if(settings.isShowNotifications()) {
             Intent alarmIntent = new Intent(context, FlarePredictionReceiver.class);
             mPredictionPendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, 0);
             mAlarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            mAlarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(),
-                    1000, mPredictionPendingIntent);
+            mAlarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), INTERVAL_HOURS * AlarmManager.INTERVAL_HOUR, mPredictionPendingIntent);
         }
 
     }
@@ -74,9 +90,16 @@ public class FlarePredictionReceiver extends BroadcastReceiver {
     public static void disableFlarePredictionNotifications(Context context) {
         if (mAlarmManager != null) {
             mAlarmManager.cancel(mPredictionPendingIntent);
-            mAlarmManager.cancel(mNotificationPendingIntent);
+            cancelNotificationPendingIntents();
         }
+    }
 
+    private static void cancelNotificationPendingIntents() {
+        Log.d(FlarePredictionReceiver.class.getSimpleName(), "cancelling " + mNotificationPendingIntents.size() + " notification pending intents");
+        for(PendingIntent notificationPendingIntent: mNotificationPendingIntents) {
+            mAlarmManager.cancel(notificationPendingIntent);
+        }
+        mNotificationPendingIntents.clear();
     }
 
 }

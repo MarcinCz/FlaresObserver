@@ -1,15 +1,32 @@
 <resources>
     <string name="app_name">Flares Observer</string>
+    <string name="title_activity_sky_pointer">Sky Pointer</string>
+    <string name="title_activity_settings">Sky Pointer</string>
 
+    <!--Flares list-->
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="flare_row_altitude">Altitude:</string>
     <string name="flare_row_azimuth">Azimuth:</string>
     <string name="no_data">No data</string>
-    <string name="title_activity_sky_pointer">Sky Pointer</string>
 
+    <!--Notification-->
     <string name="flare_prediction_notification_title_template">Flare prediction: %1$s</string>
     <string name="flare_notification_notification_title_template">Flare prediction: %1$s</string>
 
+    <!--Settings-->
     <string name="pref_show_notifications">Show flare notifications</string>
+    <string name="pref_do_not_show_notification_constraints">Turn on/off</string>
+    <string name="pref_do_not_show_notification_start_hour">Do not show after hour</string>
+    <string name="pref_do_not_show_notification_start_hour_summary">Flare notifications will be disabled after that hour</string>
+    <string name="pref_do_not_show_notification_end_hour">Do not show before hour</string>
+    <string name="pref_do_not_show_notification_end_hour_summary">Flare notifications will be disabled before that hour</string>
+    <string name="pref_notification_brightness_limit">Turn on/off</string>
+    <string name="pref_notification_brightness_limit_value">Set brightness limit</string>
+    <string name="pref_notification_brightness_limit_value_summary">Flare notifications will be disabled for flares with brighntess above the limit</string>
+
+    <!--Settings categories-->
+    <string name="pref_do_not_show_notification_constraints_title">Disable notifications between specific hours</string>
+    <string name="pref_brightness_limit_title">Disable notifications for dim flares</string>
+
 </resources>

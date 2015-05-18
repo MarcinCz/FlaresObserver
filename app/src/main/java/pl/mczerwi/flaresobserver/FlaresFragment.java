@@ -173,7 +173,7 @@ public class FlaresFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
         FlarePredictionTask task = new FlarePredictionTask(getActivity()) {
             @Override
-            protected void OnPostTaskExecute(List<IridiumFlare> flares) {
+            protected void onPostTaskExecute(List<IridiumFlare> flares) {
                 showProgress(false);
                 mFlaresList = flares;
                 mFlareListView.setAdapter(new FlaresAdapter(getActivity(), android.R.layout.simple_list_item_1, mFlaresList));
