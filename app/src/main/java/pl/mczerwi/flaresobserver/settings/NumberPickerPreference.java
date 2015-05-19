@@ -11,23 +11,33 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.NumberPicker;
 
-/**
- * Created by marcin on 2015-05-18.
- */
-public class NumberPickerPreference extends DialogPreference {
+import pl.mczerwi.flaresobserver.R;
 
-    public static final int MAX_VALUE = 100;
-    public static final int MIN_VALUE = 0;
+public class NumberPickerPreference extends DialogPreference {
 
     private NumberPicker picker;
     private int value;
+    private int minValue;
+    private int maxValue;
 
     public NumberPickerPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setAttributes(context, attrs);
     }
 
     public NumberPickerPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        setAttributes(context, attrs);
+    }
+
+    private void setAttributes(Context context, AttributeSet attrs) {
+        TypedArray styleAttributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.NumberPickerPreference, 0, 0);
+        try {
+            minValue = styleAttributes.getInteger(R.styleable.NumberPickerPreference_minValue, 0);
+            maxValue = styleAttributes.getInteger(R.styleable.NumberPickerPreference_maxValue, 0);
+        } finally {
+            styleAttributes.recycle();
+        }
     }
 
     @Override
@@ -48,9 +58,10 @@ public class NumberPickerPreference extends DialogPreference {
     @Override
     protected void onBindDialogView(@NonNull View view) {
         super.onBindDialogView(view);
-        picker.setMinValue(MIN_VALUE);
-        picker.setMaxValue(MAX_VALUE);
+        picker.setMinValue(minValue);
+        picker.setMaxValue(maxValue);
         picker.setValue(getValue());
+
     }
 
     @Override
@@ -62,12 +73,12 @@ public class NumberPickerPreference extends DialogPreference {
 
     @Override
     protected Object onGetDefaultValue(TypedArray a, int index) {
-        return a.getInt(index, MIN_VALUE);
+        return a.getInt(index, minValue);
     }
 
     @Override
     protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
-        setValue(restorePersistedValue ? getPersistedInt(MIN_VALUE) : (Integer) defaultValue);
+        setValue(restorePersistedValue ? getPersistedInt(minValue) : (Integer) defaultValue);
     }
 
     public void setValue(int value) {

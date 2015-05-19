@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/pl.mczerwi.flaresobserver"
     android:title="Settings">
     <CheckBoxPreference
         android:key="pref_show_notifications"
         android:title="@string/pref_show_notifications"
         android:defaultValue="true" />
+
+    <ListPreference
+        android:key="pref_notification_minutes_ahead"
+        android:title="@string/pref_notification_minutes_ahead"
+        android:summary="@string/pref_notification_minutes_ahead_summary"
+        android:entries="@array/notificationMinutesAheadEntries"
+        android:entryValues="@array/notificationMinutesAheadValues"
+        android:defaultValue="3"/>
 
     <PreferenceCategory
         android:title="@string/pref_do_not_show_notification_constraints_title"
@@ -19,13 +28,17 @@
             android:key="pref_do_not_show_notification_start_hour"
             android:title="@string/pref_do_not_show_notification_start_hour"
             android:summary="@string/pref_do_not_show_notification_start_hour_summary"
-            android:defaultValue="22" />
+            android:defaultValue="22"
+            custom:minValue="0"
+            custom:maxValue="24"/>
 
         <pl.mczerwi.flaresobserver.settings.NumberPickerPreference
             android:key="pref_do_not_show_notification_end_hour"
             android:title="@string/pref_do_not_show_notification_end_hour"
             android:summary="@string/pref_do_not_show_notification_end_hour_summary"
-            android:defaultValue="6" />
+            android:defaultValue="6"
+            custom:minValue="0"
+            custom:maxValue="24"/>
     </PreferenceCategory>
 
 
@@ -35,14 +48,8 @@
         <CheckBoxPreference
             android:key="pref_notification_brightness_limit"
             android:title="@string/pref_notification_brightness_limit"
+            android:summary="@string/pref_notification_brightness_limit_summary"
             android:defaultValue="true" />
-
-        <pl.mczerwi.flaresobserver.settings.NumberPickerPreference
-            android:key="pref_notification_brightness_limit_value"
-            android:title="@string/pref_notification_brightness_limit_value"
-            android:summary="@string/pref_notification_brightness_limit_value_summary"
-
-            android:defaultValue="0" />
     </PreferenceCategory>
 
 

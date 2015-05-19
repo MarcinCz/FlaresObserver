@@ -41,7 +41,7 @@ class FlareNotification {
 
                         // Set required fields, including the small icon, the
                         // notification title, and text.
-                .setSmallIcon(R.drawable.flare_notification_icon)
+                .setSmallIcon(R.drawable.falling_star_ico)
                 .setContentTitle(title)
                 .setContentText(text)
 

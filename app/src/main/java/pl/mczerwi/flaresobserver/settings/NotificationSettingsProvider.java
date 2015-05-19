@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-/**
- * Created by marcin on 2015-05-18.
- */
 public class NotificationSettingsProvider {
 
     public static NotificationSettings getNotificationSettings(Context context) {
@@ -38,9 +35,10 @@ public class NotificationSettingsProvider {
             }
 
             @Override
-            public double getBrightnessLimit() {
-                return sharedPref.getInt(SettingsActivity.KEY_PREF_NOTIFICATION_BRIGHTNESS_LIMIT_VALUE, 0);
+            public int getMinutesAhead() {
+                return Integer.valueOf(sharedPref.getString(SettingsActivity.KEY_PREF_NOTIFICATION_MINUTES_AHEAD, "15"));
             }
+
         };
     }
 }

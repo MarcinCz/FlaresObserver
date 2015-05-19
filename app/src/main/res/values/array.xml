@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="notificationMinutesAheadEntries">
+        <item>3</item>
+        <item>6</item>
+        <item>9</item>
+        <item>12</item>
+    </string-array>
+    <string-array name="notificationMinutesAheadValues">
+        <item>3</item>
+        <item>6</item>
+        <item>9</item>
+        <item>12</item>
+    </string-array>
+</resources>

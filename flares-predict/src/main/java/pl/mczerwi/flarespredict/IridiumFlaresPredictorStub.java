@@ -5,9 +5,6 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by marcin on 2015-05-10.
- */
 class IridiumFlaresPredictorStub implements IridiumFlaresPredictor {
     @Override
     public IridiumFlaresPredictorResult predict(double latitude, double longitude) {
@@ -18,12 +15,13 @@ class IridiumFlaresPredictorStub implements IridiumFlaresPredictor {
     public IridiumFlaresPredictorResult predict(double latitude, double longitude, double altitude) {
         final List<IridiumFlare> flares = new ArrayList<>();
 
+        DateTime now = DateTime.now();
         for(int i = 0; i < 10; i++) {
             IridiumFlare.IridiumFlareBuilder builder = new IridiumFlare.IridiumFlareBuilder();
             builder.altitude(i*10);
             builder.azimuth((10 - i) * 20);
             builder.brightness(i - 8);
-            builder.date(DateTime.now());
+            builder.date(now.plusHours(i).plusMinutes(i));
             flares.add(builder.build());
         }
         return new IridiumFlaresPredictorResult() {

@@ -11,9 +11,6 @@ import pl.mczerwi.flaresobserver.settings.NotificationSettings;
 import pl.mczerwi.flaresobserver.settings.NotificationSettingsProvider;
 import pl.mczerwi.flarespredict.IridiumFlare;
 
-/**
- * Created by marcin on 2015-05-16.
- */
 public class FlareNotificationReceiver extends BroadcastReceiver {
 
 
@@ -37,7 +34,7 @@ public class FlareNotificationReceiver extends BroadcastReceiver {
      * @return true if notification should be shown for provided flare
      */
     public boolean checkBrightnessLimit(IridiumFlare flare, NotificationSettings settings) {
-        return !settings.isBrightnessLimitEnabled() || flare.getBrightness() <= settings.getBrightnessLimit();
+        return !settings.isBrightnessLimitEnabled() || flare.getBrightness() <= 0;
     }
 
     /**
@@ -49,7 +46,7 @@ public class FlareNotificationReceiver extends BroadcastReceiver {
             return true;
         } else {
             int flareHour = flare.getDate().getHourOfDay();
-            return flareHour < settings.getDoNotShowStartHour() && flareHour >= settings.getDoNotShowStartHour();
+            return flareHour < settings.getDoNotShowStartHour() && flareHour >= settings.getDoNotShowEndHour();
         }
     }
 }

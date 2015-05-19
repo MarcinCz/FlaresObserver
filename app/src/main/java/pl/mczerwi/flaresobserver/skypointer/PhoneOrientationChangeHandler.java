@@ -11,12 +11,10 @@ import android.widget.TextView;
 import pl.mczerwi.flaresobserver.R;
 import pl.mczerwi.flarespredict.IridiumFlare;
 
-/**
- * Created by marcin on 2015-05-13.
- */
 class PhoneOrientationChangeHandler implements SensorEventListener {
 
-    private final TextView mTextView;
+    private final TextView mPhoneAltitudeTextView;
+    private final TextView mPhoneAzimuthTextView;
     private final IridiumFlare mIridiumFlare;
     private final ImageView mArrowCircle;
     private int mCurrentCircleArrow;
@@ -25,7 +23,8 @@ class PhoneOrientationChangeHandler implements SensorEventListener {
     private float[] mGeomagnetic;
 
     public PhoneOrientationChangeHandler(View view, IridiumFlare flare) {
-        mTextView = (TextView) view.findViewById(R.id.skypointertext);
+        mPhoneAltitudeTextView = (TextView) view.findViewById(R.id.skypointer_altitude_phone);
+        mPhoneAzimuthTextView = (TextView) view.findViewById(R.id.skypointer_azimuth_phone);
         mArrowCircle = (ImageView) view.findViewById(R.id.sky_pointer_arrow_circle);
         mIridiumFlare = flare;
         mCurrentCircleArrow = R.drawable.arrow_circle_red;
@@ -62,17 +61,22 @@ class PhoneOrientationChangeHandler implements SensorEventListener {
         double distanceToFlare = SphereHelper.getGreatCircleDistance(mIridiumFlare.getAltitude(), phoneOrientation.getAltitude(), mIridiumFlare.getAzimuth(), phoneOrientation.getAzimuth());
 
         adjustArrowCircleGraphic(distanceToFlare);
+        mPhoneAltitudeTextView.setText(String.valueOf(Math.round(phoneOrientation.getAltitude())) + "°");
+        long azimuth = Math.round(phoneOrientation.getAzimuth());
+        if(azimuth < 0) {
+            azimuth += 360;
+        }
+        mPhoneAzimuthTextView.setText(String.valueOf(azimuth) + "°");
 
         double angle = Math.toDegrees(Math.atan2(azimuthDifference, altitudeDifference));
-        mTextView.setText(String.format("Orientation:\n [0] %s\n [1] %s\n [2] %s", phoneOrientation.getAltitude(), phoneOrientation.getAzimuth(), String.valueOf(distanceToFlare)));
         mArrowCircle.setRotation((float) angle);
 
     }
 
     private boolean isChangeBigEnough(PhoneOrientation phoneOrientation) {
         if(mLastPhoneOrientation == null
-                || Math.abs(phoneOrientation.getAltitude() - mLastPhoneOrientation.getAltitude()) > 1
-                || Math.abs(phoneOrientation.getAzimuth() - mLastPhoneOrientation.getAzimuth()) > 2) {
+                || Math.abs(phoneOrientation.getAltitude() - mLastPhoneOrientation.getAltitude()) > 2
+                || Math.abs(phoneOrientation.getAzimuth() - mLastPhoneOrientation.getAzimuth()) > 5) {
             mLastPhoneOrientation = phoneOrientation;
             return true;
         } else {

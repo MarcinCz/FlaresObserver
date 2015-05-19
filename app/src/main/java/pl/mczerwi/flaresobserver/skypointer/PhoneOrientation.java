@@ -1,8 +1,5 @@
 package pl.mczerwi.flaresobserver.skypointer;
 
-/**
- * Created by marcin on 2015-05-12.
- */
 class PhoneOrientation {
 
     private final double altitude;
@@ -14,11 +11,7 @@ class PhoneOrientation {
     }
 
     private double getAdjustedAzimuth(float[] orientation) {
-        double azimuth = Math.toDegrees(orientation[0]);
-        if(azimuth < 0) {
-            azimuth += 360f;
-        }
-        return azimuth;
+        return Math.toDegrees(orientation[0]);
     }
 
     private double getAdjustedAltitude(float[] orientation) {

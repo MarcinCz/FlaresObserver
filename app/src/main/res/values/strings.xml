@@ -10,20 +10,29 @@
     <string name="flare_row_azimuth">Azimuth:</string>
     <string name="no_data">No data</string>
 
+    <!--Sky Pointer-->
+    <string name="skypointer_help">Move your device according to the arrow direction to see where the flare will appear</string>
+    <string name="skypointer_altitude_phone">Phone altitude:</string>
+    <string name="skypointer_azimuth_phone">Phone azimuth:</string>
+    <string name="skypointer_altitude_flare">Flare altitude:</string>
+    <string name="skypointer_azimuth_flare">Flare azimuth:</string>
+    <string name="skypointer_brightness_flare">Brightness:</string>
+    <string name="skypointer_time_left">Time left:</string>
+
     <!--Notification-->
-    <string name="flare_prediction_notification_title_template">Flare prediction: %1$s</string>
-    <string name="flare_notification_notification_title_template">Flare prediction: %1$s</string>
+    <string name="flare_notification_notification_title_template">%1$s flare prediction</string>
 
     <!--Settings-->
     <string name="pref_show_notifications">Show flare notifications</string>
+    <string name="pref_notification_minutes_ahead">Set when to show notifications</string>
+    <string name="pref_notification_minutes_ahead_summary">Specified value is the number of minutes ahead of flare prediction</string>
     <string name="pref_do_not_show_notification_constraints">Turn on/off</string>
     <string name="pref_do_not_show_notification_start_hour">Do not show after hour</string>
     <string name="pref_do_not_show_notification_start_hour_summary">Flare notifications will be disabled after that hour</string>
     <string name="pref_do_not_show_notification_end_hour">Do not show before hour</string>
     <string name="pref_do_not_show_notification_end_hour_summary">Flare notifications will be disabled before that hour</string>
     <string name="pref_notification_brightness_limit">Turn on/off</string>
-    <string name="pref_notification_brightness_limit_value">Set brightness limit</string>
-    <string name="pref_notification_brightness_limit_value_summary">Flare notifications will be disabled for flares with brighntess above the limit</string>
+    <string name="pref_notification_brightness_limit_summary">If turned on notifications for flares with brightness over 0 won\'t be shown</string>
 
     <!--Settings categories-->
     <string name="pref_do_not_show_notification_constraints_title">Disable notifications between specific hours</string>

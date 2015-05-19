@@ -22,9 +22,6 @@ import pl.mczerwi.flaresobserver.settings.NotificationSettings;
 import pl.mczerwi.flaresobserver.settings.NotificationSettingsProvider;
 import pl.mczerwi.flarespredict.IridiumFlare;
 
-/**
- * Created by marcin on 2015-05-15.
- */
 public class FlarePredictionReceiver extends BroadcastReceiver {
 
     private final static int INTERVAL_HOURS = 6;
@@ -60,7 +57,8 @@ public class FlarePredictionReceiver extends BroadcastReceiver {
                     mNotificationPendingIntents.add(notificationPendingIntent);
                     mAlarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-                    DateTime notificationDate = flare.getDate().withZone(DateTimeZone.getDefault()).minusMinutes(15);
+                    NotificationSettings notificationSettings = NotificationSettingsProvider.getNotificationSettings(context);
+                    DateTime notificationDate = flare.getDate().withZone(DateTimeZone.getDefault()).minusMinutes(notificationSettings.getMinutesAhead());
 
                     mAlarmManager.set(AlarmManager.RTC_WAKEUP, notificationDate.getMillis(), notificationPendingIntent);
                     Log.d(getClass().getSimpleName(), "set flare notification for " + notificationDate.toString());
