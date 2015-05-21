@@ -10,6 +10,11 @@ class PhoneOrientation {
         this.azimuth = getAdjustedAzimuth(orientation);
     }
 
+    public PhoneOrientation(double azimuth, double altitude)  {
+        this.azimuth = azimuth;
+        this.altitude = altitude;
+    }
+
     private double getAdjustedAzimuth(float[] orientation) {
         return Math.toDegrees(orientation[0]);
     }

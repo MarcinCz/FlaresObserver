@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.apache.commons.collections4.queue.CircularFifoQueue;
+
 import pl.mczerwi.flaresobserver.R;
 import pl.mczerwi.flarespredict.IridiumFlare;
 
@@ -21,6 +23,7 @@ class PhoneOrientationChangeHandler implements SensorEventListener {
     private PhoneOrientation mLastPhoneOrientation;
     private float[] mGravity;
     private float[] mGeomagnetic;
+    private CircularFifoQueue<PhoneOrientation> mLastPhoneOrientations = new CircularFifoQueue<>(10);
 
     public PhoneOrientationChangeHandler(View view, IridiumFlare flare) {
         mPhoneAltitudeTextView = (TextView) view.findViewById(R.id.skypointer_altitude_phone);
@@ -52,9 +55,7 @@ class PhoneOrientationChangeHandler implements SensorEventListener {
 
     private void onPhoneOrientationChanged(PhoneOrientation phoneOrientation) {
 
-        if(!isChangeBigEnough(phoneOrientation)) {
-            return;
-        }
+        phoneOrientation = getSmoothedOrientation(phoneOrientation);
 
         double altitudeDifference = mIridiumFlare.getAltitude() - phoneOrientation.getAltitude();
         double azimuthDifference = SphereHelper.getAzimuthDifference(mIridiumFlare.getAzimuth(), phoneOrientation.getAzimuth());
@@ -71,6 +72,31 @@ class PhoneOrientationChangeHandler implements SensorEventListener {
         double angle = Math.toDegrees(Math.atan2(azimuthDifference, altitudeDifference));
         mArrowCircle.setRotation((float) angle);
 
+    }
+
+    void setLastPhoneOrientations(CircularFifoQueue<PhoneOrientation> lastPhoneOrientations) {
+        this.mLastPhoneOrientations = lastPhoneOrientations;
+    }
+
+    PhoneOrientation getSmoothedOrientation(PhoneOrientation orientation) {
+        mLastPhoneOrientations.add(orientation);
+        double smoothAzimuth = 0;
+        double smoothAltitude = 0;
+
+        double singleAzimuth = orientation.getAzimuth();
+        for(PhoneOrientation lastPhoneOrientation: mLastPhoneOrientations) {
+            if(lastPhoneOrientation == null) {
+                break;
+            }
+            smoothAltitude += lastPhoneOrientation.getAltitude();
+            if(Math.abs(Math.round(lastPhoneOrientation.getAzimuth() - singleAzimuth)) < 20) {
+                smoothAzimuth += lastPhoneOrientation.getAzimuth();
+            }
+        }
+
+        smoothAltitude /= mLastPhoneOrientations.size();
+        smoothAzimuth /= mLastPhoneOrientations.size();
+        return new PhoneOrientation(smoothAzimuth, smoothAltitude);
     }
 
     private boolean isChangeBigEnough(PhoneOrientation phoneOrientation) {

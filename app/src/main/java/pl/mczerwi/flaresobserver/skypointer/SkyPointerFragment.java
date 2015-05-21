@@ -97,7 +97,7 @@ public class SkyPointerFragment extends Fragment {
             public void onTick(long millis) {
                 int seconds = (int) (millis / 1000) % 60 ;
                 int minutes = (int) ((millis / (1000*60)) % 60);
-                int hours   = (int) ((millis / (1000*60*60)) % 24);
+                int hours   = (int) ((millis / (1000*60*60)));
                 String text = String.format("%02d:%02d:%02d",hours,minutes,seconds);
                 mFlareTimeLeftTextView.setText(text);
             }
