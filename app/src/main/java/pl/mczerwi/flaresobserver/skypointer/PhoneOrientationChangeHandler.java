@@ -55,6 +55,9 @@ class PhoneOrientationChangeHandler implements SensorEventListener {
 
     private void onPhoneOrientationChanged(PhoneOrientation phoneOrientation) {
 
+//        if(!isChangeBigEnough(phoneOrientation)) {
+//            return;
+//        }
         phoneOrientation = getSmoothedOrientation(phoneOrientation);
 
         double altitudeDifference = mIridiumFlare.getAltitude() - phoneOrientation.getAltitude();
@@ -64,9 +67,7 @@ class PhoneOrientationChangeHandler implements SensorEventListener {
         adjustArrowCircleGraphic(distanceToFlare);
         mPhoneAltitudeTextView.setText(String.valueOf(Math.round(phoneOrientation.getAltitude())) + "°");
         long azimuth = Math.round(phoneOrientation.getAzimuth());
-        if(azimuth < 0) {
-            azimuth += 360;
-        }
+
         mPhoneAzimuthTextView.setText(String.valueOf(azimuth) + "°");
 
         double angle = Math.toDegrees(Math.atan2(azimuthDifference, altitudeDifference));
@@ -74,36 +75,36 @@ class PhoneOrientationChangeHandler implements SensorEventListener {
 
     }
 
-    void setLastPhoneOrientations(CircularFifoQueue<PhoneOrientation> lastPhoneOrientations) {
-        this.mLastPhoneOrientations = lastPhoneOrientations;
-    }
-
-    PhoneOrientation getSmoothedOrientation(PhoneOrientation orientation) {
-        mLastPhoneOrientations.add(orientation);
+    private PhoneOrientation getSmoothedOrientation(PhoneOrientation orientation) {
+        if(orientation.getAzimuth() < 0) {
+            mLastPhoneOrientations.add(new PhoneOrientation(orientation.getAzimuth() + 360, orientation.getAltitude()));
+        } else {
+            mLastPhoneOrientations.add(orientation);
+        }
         double smoothAzimuth = 0;
         double smoothAltitude = 0;
 
-        double singleAzimuth = orientation.getAzimuth();
+        double singleAzimuth = mLastPhoneOrientations.get(0).getAzimuth();
         for(PhoneOrientation lastPhoneOrientation: mLastPhoneOrientations) {
             if(lastPhoneOrientation == null) {
                 break;
             }
             smoothAltitude += lastPhoneOrientation.getAltitude();
-            if(Math.abs(Math.round(lastPhoneOrientation.getAzimuth() - singleAzimuth)) < 20) {
+            if(Math.abs(Math.round(lastPhoneOrientation.getAzimuth() - singleAzimuth)) < 180) {
                 smoothAzimuth += lastPhoneOrientation.getAzimuth();
             }
         }
 
         smoothAltitude /= mLastPhoneOrientations.size();
         smoothAzimuth /= mLastPhoneOrientations.size();
-        return new PhoneOrientation(smoothAzimuth, smoothAltitude);
+        mLastPhoneOrientation = new PhoneOrientation(smoothAzimuth, smoothAltitude);
+        return mLastPhoneOrientation;
     }
 
     private boolean isChangeBigEnough(PhoneOrientation phoneOrientation) {
         if(mLastPhoneOrientation == null
                 || Math.abs(phoneOrientation.getAltitude() - mLastPhoneOrientation.getAltitude()) > 2
                 || Math.abs(phoneOrientation.getAzimuth() - mLastPhoneOrientation.getAzimuth()) > 5) {
-            mLastPhoneOrientation = phoneOrientation;
             return true;
         } else {
             return false;

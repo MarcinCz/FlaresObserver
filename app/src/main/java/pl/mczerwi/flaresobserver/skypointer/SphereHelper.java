@@ -6,8 +6,8 @@ package pl.mczerwi.flaresobserver.skypointer;
 class SphereHelper {
 
     public final static double SPHERE_BIG_DISTANCE = Math.PI / 2;
-    public final static double SPHERE_MEDIUM_DISTANCE = Math.PI / 5;
-    public final static double SPHERE_SMALL_DISTANCE = Math.PI / 15;
+    public final static double SPHERE_MEDIUM_DISTANCE = Math.PI / 8;
+    public final static double SPHERE_SMALL_DISTANCE = Math.PI / 32;
 
     /**
      * Calculates great-circle distance based on angles in degrees.
